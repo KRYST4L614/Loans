@@ -10,4 +10,20 @@
 
     <string name="arranged_loans_onboarding_body">На главном экране приложения отображается список оформленных займов.</string>
     <string name="arranged_loans_onboarding_title">Оформленные займы</string>
+
+    <string-array name="menu_items">
+        <item>Мои займы</item>
+        <item>Предложения для вас</item>
+        <item>Отделения банка</item>
+        <item>Помощь</item>
+        <item>Язык</item>
+        <item>Выйти</item>
+    </string-array>
+
+    <string-array name="language_items">
+        <item>Русский</item>
+        <item>English</item>
+        <item>Deautsch</item>
+        <item>Кыргызча</item>
+    </string-array>
 </resources>

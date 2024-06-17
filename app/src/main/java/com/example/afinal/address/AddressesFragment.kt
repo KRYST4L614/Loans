@@ -1,4 +1,4 @@
-package com.example.afinal.onboarding
+package com.example.afinal.address
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.afinal.MainActivity
-import com.example.afinal.R
-import com.example.afinal.databinding.FragmentHomeBinding
+import com.example.afinal.databinding.FragmentAdressesBinding
 
-class HomeFragment : Fragment() {
+class AddressesFragment : Fragment() {
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() = AddressesFragment()
     }
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentAdressesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,15 +21,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(layoutInflater)
+        _binding = FragmentAdressesBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.menu.findItem(R.id.info).setOnMenuItemClickListener {
-            (requireActivity() as MainActivity).onOnboarding()
-            true
+        binding.toolbar.setNavigationOnClickListener {
+            (requireActivity() as MainActivity).supportFragmentManager.popBackStack()
         }
     }
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.afinal.MainActivity
 import com.example.afinal.R
 import com.example.afinal.databinding.FragmentOnboardingBinding
+import com.example.afinal.util.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

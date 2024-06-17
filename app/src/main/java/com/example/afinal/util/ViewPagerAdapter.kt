@@ -1,4 +1,4 @@
-package com.example.afinal.onboarding
+package com.example.afinal.util
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
