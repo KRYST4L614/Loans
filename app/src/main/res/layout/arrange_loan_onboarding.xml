@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="?attr/backgroundColor"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@drawable/arrange_loan_onboarding_image"/>
+
+    <TextView
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/arrange_loan_onboarding_title"
+        android:textColor="@color/fontDarkPrimaryInverse"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:lineHeight="28sp"
+        android:textFontWeight="600"/>
+
+    <TextView
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/arrange_loan_onboarding_body"
+        android:textColor="@color/fontDarkPrimaryInverse"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:lineHeight="20sp"
+        android:textFontWeight="400"/>
+
+
+</LinearLayout>

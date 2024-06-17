@@ -1,0 +1,22 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.Final" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorPrimaryVariant">@color/primaryLight</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="backgroundColor">@color/backGroundPrimary</item>
+        <item name="colorSecondary">@color/backGroundSecondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorTertiary">@color/backGroundTertiary</item>
+        <item name="colorOutline">@color/backGroundDisable</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+        <item name="colorOnPrimaryFixedVariant">@color/onPrimaryInverse</item>
+        <item name="colorSurfaceInverse">@color/backGroundInvert</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">#FF0E181E</item>
+        <item name="android:windowBackground">@color/fontDarkPrimaryInverse</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
