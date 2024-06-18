@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSecondary"
+    android:orientation="vertical"
+    android:paddingVertical="16dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:background="?attr/backgroundColor"
+        app:cardCornerRadius="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/nameTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Имя"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Иван"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/nameTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/secondNameTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Фамилия"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameTitle" />
+
+            <TextView
+                android:id="@+id/secondName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Петров"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/secondNameTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <TextView
+                android:id="@+id/phoneTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Номер телефона"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondNameTitle" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="+7 923 145-88-90"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/phoneTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondName" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/backgroundColor"
+        app:cardCornerRadius="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/loanIdTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Номер займа"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/loanId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="№ 176899134565"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/loanIdTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dateTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Дата оформления"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loanIdTitle" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="25.05.2024"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/dateTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loanId" />
+
+            <TextView
+                android:id="@+id/periodTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Период (дней)"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dateTitle" />
+
+            <TextView
+                android:id="@+id/period"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="5"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/periodTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date" />
+
+            <TextView
+                android:id="@+id/percentTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Процент"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/periodTitle" />
+
+            <TextView
+                android:id="@+id/percent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="12%"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/percentTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/period" />
+
+            <TextView
+                android:id="@+id/sumTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Сумма"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/percentTitle" />
+
+            <TextView
+                android:id="@+id/sum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="10 000 ₽"
+                android:textColor="@color/fontDarkPrimaryInverse"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/sumTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/percent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/statusTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="16sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="Статус"
+                android:textColor="#FF73787F"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statusId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineHeight="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:text="На рассмотрении"
+                android:textColor="@color/primaryDark"
+                android:textFontWeight="500"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/statusTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="400"
+        android:lineHeight="16sp"
+        android:text="Когда займ примет статус «Одобрен», Вам нужно будет подойти с паспортом в отделение банка для подписания договора и получить деньги"
+        android:textColor="#FF73787F"
+        android:textSize="12sp" />
+
+</LinearLayout>

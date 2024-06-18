@@ -1,22 +1,19 @@
-package com.example.afinal.home
+package com.example.afinal.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.MainActivity
-import com.example.afinal.R
-import com.example.afinal.databinding.FragmentLanguageBinding
-import com.example.afinal.home.adapter.LanguageItemAdapter
+import com.example.afinal.databinding.FragmentSupportBinding
 
-class LanguageFragment : Fragment() {
+class SupportFragment : Fragment() {
     companion object {
-        fun newInstance() = LanguageFragment()
+        fun newInstance() = SupportFragment()
     }
 
-    private var _binding: FragmentLanguageBinding? = null
+    private var _binding: FragmentSupportBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,7 +21,7 @@ class LanguageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLanguageBinding.inflate(layoutInflater)
+        _binding = FragmentSupportBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -32,12 +29,6 @@ class LanguageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener {
             (requireActivity() as MainActivity).supportFragmentManager.popBackStack()
-        }
-
-        binding.listView.adapter =
-            LanguageItemAdapter(resources.getStringArray(R.array.language_items).toList()) {}
-        binding.listView.layoutManager = object : LinearLayoutManager(requireContext()) {
-            override fun canScrollVertically() = false
         }
     }
 

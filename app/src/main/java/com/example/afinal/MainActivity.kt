@@ -6,9 +6,9 @@ import com.example.afinal.address.AddressesFragment
 import com.example.afinal.auth.AuthFragment
 import com.example.afinal.databinding.ActivityMainBinding
 import com.example.afinal.home.HomeFragment
-import com.example.afinal.home.LanguageFragment
-import com.example.afinal.home.SpecialFragment
-import com.example.afinal.home.SupportFragment
+import com.example.afinal.menu.LanguageFragment
+import com.example.afinal.menu.SpecialFragment
+import com.example.afinal.menu.SupportFragment
 import com.example.afinal.onboarding.OnboardingFragment
 
 class MainActivity : AppCompatActivity() {

@@ -1,9 +1,10 @@
-package com.example.afinal.home.adapter
+package com.example.afinal.menu.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.afinal.databinding.MenuItemBinding
+import com.example.afinal.menu.adapter.MenuViewHolder
 
 class MenuItemAdapter(
     private val data: List<String>,

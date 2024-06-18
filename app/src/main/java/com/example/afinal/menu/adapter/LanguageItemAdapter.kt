@@ -1,4 +1,4 @@
-package com.example.afinal.home.adapter
+package com.example.afinal.menu.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

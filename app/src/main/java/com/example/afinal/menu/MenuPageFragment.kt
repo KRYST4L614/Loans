@@ -1,4 +1,4 @@
-package com.example.afinal.home
+package com.example.afinal.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.MainActivity
 import com.example.afinal.R
 import com.example.afinal.databinding.FragmentMenuPageBinding
-import com.example.afinal.home.adapter.MenuItemAdapter
+import com.example.afinal.menu.adapter.MenuItemAdapter
 
 class MenuPageFragment : Fragment() {
     companion object {

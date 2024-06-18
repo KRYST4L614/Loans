@@ -1,4 +1,4 @@
-package com.example.afinal.home.adapter
+package com.example.afinal.menu.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.afinal.databinding.LanguageItemBinding

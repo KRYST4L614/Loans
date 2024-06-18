@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.afinal.MainActivity
 import com.example.afinal.R
 import com.example.afinal.databinding.FragmentHomeBinding
+import com.example.afinal.menu.MenuPageFragment
 import com.example.afinal.util.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 

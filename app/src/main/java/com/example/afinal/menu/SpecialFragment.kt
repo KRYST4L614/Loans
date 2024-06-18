@@ -1,4 +1,4 @@
-package com.example.afinal.home
+package com.example.afinal.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater
