@@ -13,8 +13,17 @@
             <option value="$PROJECT_DIR$/component" />
             <option value="$PROJECT_DIR$/component/resources" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/addresses" />
             <option value="$PROJECT_DIR$/feature/auth" />
+            <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/language" />
             <option value="$PROJECT_DIR$/feature/onboarding" />
+            <option value="$PROJECT_DIR$/feature/special" />
+            <option value="$PROJECT_DIR$/feature/support" />
+            <option value="$PROJECT_DIR$/shared" />
+            <option value="$PROJECT_DIR$/shared/fragmentDependencies" />
+            <option value="$PROJECT_DIR$/shared/viewModelFactory" />
+            <option value="$PROJECT_DIR$/shared/viewPagerAdapter" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

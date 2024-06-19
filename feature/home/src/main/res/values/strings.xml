@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="arrange_loan_onboarding_body">Выберите сумму и нажмите «продолжить».
+        Затем укажите свои данные.\nПосле нажатия «Оформить займ» заявка поступит в банк</string>
+    <string name="arrange_loan_onboarding_title">Оформить займ</string>
+
+    <string name="get_loan_onboarding_body">Отслеживайте изменение статуса заявки.
+        \nКогда займ будет одобрен, подойдите с паспортом в <font color='#F1CB16'>отделение банка</font> для подписания договора</string>
+    <string name="get_loan_onboarding_title">Получить займ</string>
+
+    <string name="arranged_loans_onboarding_body">На главном экране приложения отображается список оформленных займов.</string>
+    <string name="arranged_loans_onboarding_title">Оформленные займы</string>
+
+    <string-array name="menu_items">
+        <item>Мои займы</item>
+        <item>Предложения для вас</item>
+        <item>Отделения банка</item>
+        <item>Помощь</item>
+        <item>Язык</item>
+        <item>Выйти</item>
+    </string-array>
+</resources>

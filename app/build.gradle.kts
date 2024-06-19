@@ -59,4 +59,13 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
 
     implementation(project(":feature:auth"))
+    implementation(project(":feature:onboarding"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:language"))
+    implementation(project(":feature:special"))
+    implementation(project(":feature:support"))
+    implementation(project(":feature:addresses"))
+    implementation(project(":component:resources"))
+    implementation(project(":shared:fragmentDependencies"))
+    implementation(project(":shared:viewModelFactory"))
 }

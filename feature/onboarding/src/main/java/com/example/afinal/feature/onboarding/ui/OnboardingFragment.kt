@@ -1,15 +1,22 @@
 package com.example.afinal.feature.onboarding.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.feature.onboarding.databinding.FragmentOnboardingBinding
-import com.example.afinal.util.ViewPagerAdapter
+import com.example.afinal.feature.onboarding.di.DaggerOnboardingComponent
+import com.example.afinal.feature.onboarding.presentation.OnboardingViewModel
+import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
+import com.example.afinal.shared.viewPagerAdapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import javax.inject.Inject
 
 
 class OnboardingFragment : Fragment() {
@@ -19,6 +26,19 @@ class OnboardingFragment : Fragment() {
 
     private var _binding: FragmentOnboardingBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<OnboardingViewModel> { viewModelFactory }
+
+    override fun onAttach(context: Context) {
+        DaggerOnboardingComponent
+            .builder()
+            .dependencies(FragmentDependenciesStore.dependencies)
+            .build()
+            .inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +54,7 @@ class OnboardingFragment : Fragment() {
         setMenuVisibility(true)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
-            (requireActivity() as MainActivity).onHome()
+            viewModel.openHomePage()
         }
         binding.viewPager.adapter = ViewPagerAdapter(
             childFragmentManager,
@@ -45,7 +65,7 @@ class OnboardingFragment : Fragment() {
                 ArrangedLoansOnboardingFragment::newInstance
             )
         )
-        TabLayoutMediator(binding.tableLayout, binding.viewPager) { tab, position ->
+        TabLayoutMediator(binding.tableLayout, binding.viewPager) { _, _ ->
         }.attach()
 
         with(binding) {
@@ -55,7 +75,7 @@ class OnboardingFragment : Fragment() {
 
             nextButton.setOnClickListener {
                 if (viewPager.currentItem == 2) {
-                    (requireActivity() as MainActivity).onHome()
+                    viewModel.openHomePage()
                 }
                 viewPager.currentItem = (viewPager.currentItem + 1).coerceAtMost(2)
             }

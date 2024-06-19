@@ -3,6 +3,7 @@ package com.example.afinal.di
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.MainActivity
+import com.example.afinal.shared.fragmentDependencies.FragmentDependencies
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

@@ -1,14 +1,21 @@
 package com.example.afinal.feature.auth.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.feature.auth.databinding.AuthBottomSheetBinding
+import com.example.afinal.feature.auth.di.DaggerAuthComponent
+import com.example.afinal.feature.auth.presentation.AuthViewModel
 import com.example.afinal.feature.auth.util.PasswordTransformation
+import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
+import javax.inject.Inject
 
 class AuthBottomSheet : BottomSheetDialogFragment() {
 
@@ -18,6 +25,19 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: AuthBottomSheetBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<AuthViewModel> { viewModelFactory }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        DaggerAuthComponent
+            .builder()
+            .dependencies(FragmentDependenciesStore.dependencies)
+            .build()
+            .inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +74,7 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
         )
 
         binding.button.setOnClickListener {
+            viewModel.openOnboarding()
             dismiss()
         }
     }
