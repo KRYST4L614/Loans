@@ -29,18 +29,19 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Вход" />
+                android:text="@string/log_in" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Регистрация" />
+                android:text="@string/sign_up" />
         </com.google.android.material.tabs.TabLayout>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:importantForAccessibility="no"
             android:src="@drawable/divider" />
     </FrameLayout>
 
@@ -49,7 +50,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Логин"
+        android:hint="@string/Login"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="16dp"
@@ -73,7 +74,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Пароль"
+        android:hint="@string/password"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="16dp"
@@ -99,7 +100,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Повторите пароль"
+        android:hint="@string/repeat_password"
         android:inputType="textPassword"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
@@ -130,7 +131,7 @@
         android:layout_margin="16dp"
         android:paddingHorizontal="14dp"
         android:paddingVertical="13dp"
-        android:text="Войти"
+        android:text="@string/enter"
         android:textAllCaps="false"
         android:textColor="?attr/colorOnPrimary"
         app:cornerRadius="8dp" />

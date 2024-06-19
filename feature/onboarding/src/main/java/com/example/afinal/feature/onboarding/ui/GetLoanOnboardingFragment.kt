@@ -1,21 +1,20 @@
-package com.example.afinal.onboarding
+package com.example.afinal.feature.onboarding.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.afinal.databinding.ArrangeLoanOnboardingBinding
+import com.example.afinal.feature.onboarding.databinding.GetLoanOnboardingBinding
 
-class ArrangeLoanOnboardingFragment : Fragment() {
-
+class GetLoanOnboardingFragment : Fragment() {
     companion object {
-        fun newInstance() = ArrangeLoanOnboardingFragment()
+        fun newInstance() = GetLoanOnboardingFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = ArrangeLoanOnboardingBinding.inflate(layoutInflater).root
+    ): View = GetLoanOnboardingBinding.inflate(layoutInflater).root
 }

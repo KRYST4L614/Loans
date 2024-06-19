@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Final"
 include(":app")
- 
+include(":component:resources")
+include(":feature:auth")
+include(":feature:onboarding")

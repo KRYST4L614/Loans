@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="log_in">Вход</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="Login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="enter">Войти</string>
+</resources>

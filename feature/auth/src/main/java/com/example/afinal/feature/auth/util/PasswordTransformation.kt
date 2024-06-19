@@ -1,4 +1,4 @@
-package com.example.afinal.util
+package com.example.afinal.feature.auth.util
 
 import android.text.method.PasswordTransformationMethod
 import android.view.View

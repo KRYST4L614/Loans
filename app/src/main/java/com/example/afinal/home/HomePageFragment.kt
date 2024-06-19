@@ -34,7 +34,8 @@ class HomePageFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     binding.sum.text =
-                        Editable.Factory.getInstance().newEditable((progress * 100).toString() + " ₽")
+                        Editable.Factory.getInstance()
+                            .newEditable((progress * 100).toString() + " ₽")
                 }
                 binding.sumMessage.text = if (progress * 100 < 500) "Минимум 500 рублей" else null
             }
@@ -45,9 +46,10 @@ class HomePageFragment : Fragment() {
 
         })
 
-        binding.sum.doOnTextChanged { text, start, before, count ->
+        binding.sum.doOnTextChanged { text, _, _, _ ->
             binding.sumSlider.progress = text.toString().dropLast(2).toInt() / 100
-            binding.sumMessage.text = if (text.toString().dropLast(2).toInt() > 10000) "Максимум 10000" else null
+            binding.sumMessage.text =
+                if (text.toString().dropLast(2).toInt() > 10000) "Максимум 10000" else null
         }
     }
 

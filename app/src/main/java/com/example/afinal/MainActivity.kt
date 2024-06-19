@@ -3,8 +3,8 @@ package com.example.afinal
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afinal.address.AddressesFragment
-import com.example.afinal.auth.AuthFragment
 import com.example.afinal.databinding.ActivityMainBinding
+import com.example.afinal.feature.auth.ui.AuthFragment
 import com.example.afinal.home.HomeFragment
 import com.example.afinal.menu.LanguageFragment
 import com.example.afinal.menu.SpecialFragment

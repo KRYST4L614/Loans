@@ -1,4 +1,4 @@
-package com.example.afinal.onboarding
+package com.example.afinal.feature.onboarding.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.afinal.MainActivity
-import com.example.afinal.R
-import com.example.afinal.databinding.FragmentOnboardingBinding
+import com.example.afinal.feature.onboarding.databinding.FragmentOnboardingBinding
 import com.example.afinal.util.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -33,8 +31,6 @@ class OnboardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.inflateMenu(R.menu.onboarding_menu)
-        binding.toolbar.title = ""
         setMenuVisibility(true)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {

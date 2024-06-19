@@ -1,16 +1,14 @@
-package com.example.afinal.auth
+package com.example.afinal.feature.auth.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.example.afinal.MainActivity
-import com.example.afinal.util.PasswordTransformation
-import com.example.afinal.databinding.AuthBottomSheetBinding
+import com.example.afinal.feature.auth.databinding.AuthBottomSheetBinding
+import com.example.afinal.feature.auth.util.PasswordTransformation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
-
 
 class AuthBottomSheet : BottomSheetDialogFragment() {
 
@@ -56,7 +54,6 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
         )
 
         binding.button.setOnClickListener {
-            (requireActivity() as MainActivity).onOnboarding()
             dismiss()
         }
     }

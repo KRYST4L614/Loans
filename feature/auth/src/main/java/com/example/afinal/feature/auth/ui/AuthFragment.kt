@@ -1,4 +1,4 @@
-package com.example.afinal.auth
+package com.example.afinal.feature.auth.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
-import com.example.afinal.databinding.FragmentAuthBinding
+import com.example.afinal.feature.auth.databinding.FragmentAuthBinding
 
 class AuthFragment : Fragment() {
 
