@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.feature.auth.databinding.AuthBottomSheetBinding
 import com.example.afinal.feature.auth.di.DaggerAuthComponent
+import com.example.afinal.feature.auth.presentation.AuthState
 import com.example.afinal.feature.auth.presentation.AuthViewModel
 import com.example.afinal.feature.auth.util.PasswordTransformation
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
@@ -74,8 +75,16 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
         )
 
         binding.button.setOnClickListener {
-            viewModel.openOnboarding()
-            dismiss()
+            viewModel.login(
+                binding.loginEditText.text.toString(),
+                binding.passwordEditText.text.toString()
+            )
+        }
+
+        viewModel.state.observe(viewLifecycleOwner) {
+            if (it is AuthState.Success) {
+                dismiss()
+            }
         }
     }
 

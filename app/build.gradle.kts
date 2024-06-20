@@ -57,6 +57,10 @@ dependencies {
     implementation(libs.com.github.terrakok.cicerone)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.com.squareup.retrofit2)
+    implementation(libs.com.squareup.retrofit2.gson)
+    implementation(libs.com.squareup.okhttp3.logging.interceptor)
+    implementation(libs.com.squareup.retrofit2.scalars)
 
     implementation(project(":feature:auth"))
     implementation(project(":feature:onboarding"))

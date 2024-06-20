@@ -91,12 +91,16 @@ class OnboardingFragment : Fragment() {
                         binding.nextButton.text = "Далее"
                     }
                 }
-                if (tab?.position == 0) {
-                    binding.backButton.visibility = View.INVISIBLE
-                } else if (tab?.position == 2) {
-                    binding.nextButton.text = "Закрыть"
-                } else {
-                    binding.backButton.visibility = View.VISIBLE
+                when (tab?.position) {
+                    0 -> {
+                        binding.backButton.visibility = View.INVISIBLE
+                    }
+                    2 -> {
+                        binding.nextButton.text = "Закрыть"
+                    }
+                    else -> {
+                        binding.backButton.visibility = View.VISIBLE
+                    }
                 }
             }
 

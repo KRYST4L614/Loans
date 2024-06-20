@@ -4,7 +4,7 @@ import com.example.afinal.feature.auth.ui.AuthBottomSheet
 import com.example.afinal.shared.fragmentDependencies.FragmentDependencies
 import dagger.Component
 
-@Component(dependencies = [FragmentDependencies::class])
+@Component(dependencies = [FragmentDependencies::class], modules = [DataModule::class])
 interface AuthComponent {
 
     fun inject(fragment: AuthBottomSheet)
