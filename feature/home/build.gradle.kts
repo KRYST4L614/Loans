@@ -51,9 +51,12 @@ dependencies {
     implementation(libs.com.github.terrakok.cicerone)
     implementation(libs.com.google.dagger)
     ksp(libs.com.google.dagger.compiler)
+    implementation(libs.com.squareup.retrofit2)
+    implementation(libs.androidx.swiperefreshlayout)
 
     implementation(project(":component:resources"))
     implementation(project(":shared:fragmentDependencies"))
     implementation(project(":shared:viewModelFactory"))
     implementation(project(":shared:viewPagerAdapter"))
+    implementation(project(":util"))
 }

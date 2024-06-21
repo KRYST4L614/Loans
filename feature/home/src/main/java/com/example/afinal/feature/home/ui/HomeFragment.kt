@@ -50,41 +50,57 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupMenu()
+        setupTableLayout()
+        setupViewPager()
+    }
+
+    private fun setupMenu() {
         binding.toolbar.menu.findItem(R.id.info).setOnMenuItemClickListener {
             viewModel.openOnboarding()
             true
         }
+    }
 
-        binding.viewPager.adapter = ViewPagerAdapter(
-            childFragmentManager,
-            lifecycle,
-            listOf(
-                HomePageFragment::newInstance,
-                MenuPageFragment::newInstance
+    private fun setupViewPager() {
+        with(binding) {
+            viewPager.adapter = ViewPagerAdapter(
+                childFragmentManager,
+                lifecycle,
+                listOf(
+                    HomePageFragment::newInstance,
+                    MenuPageFragment::newInstance
+                )
             )
-        )
-        binding.viewPager.isUserInputEnabled = false
 
-        binding.tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                binding.viewPager.currentItem = tab!!.position
-            }
+            viewPager.isUserInputEnabled = false
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-
-        })
-
-        binding.viewPager.registerOnPageChangeCallback(
-            object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    binding.toolbar.title = if (position == 0) "Главная" else "Меню"
-                    binding.tableLayout.getTabAt(position)?.select()
+            viewPager.registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        binding.toolbar.title =
+                            getString(if (position == 0) R.string.home else R.string.menu)
+                        binding.tableLayout.getTabAt(position)?.select()
+                    }
                 }
-            }
-        )
+            )
+        }
+    }
+
+    private fun setupTableLayout() {
+        with(binding) {
+            tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    viewPager.currentItem = tab!!.position
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+            })
+        }
     }
 
     override fun onDestroyView() {

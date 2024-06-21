@@ -52,8 +52,10 @@ dependencies {
     implementation(libs.com.google.dagger)
     ksp(libs.com.google.dagger.compiler)
     implementation(libs.com.squareup.retrofit2)
+    implementation(libs.androidx.security.crypto)
 
     implementation(project(":component:resources"))
     implementation(project(":shared:fragmentDependencies"))
     implementation(project(":shared:viewModelFactory"))
+    implementation(project(":util"))
 }

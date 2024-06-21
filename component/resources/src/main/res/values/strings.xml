@@ -20,10 +20,5 @@
         <item>Выйти</item>
     </string-array>
 
-    <string-array name="language_items">
-        <item>Русский</item>
-        <item>English</item>
-        <item>Deautsch</item>
-        <item>Кыргызча</item>
-    </string-array>
+    <string name="sum">%1$s ₽</string>
 </resources>

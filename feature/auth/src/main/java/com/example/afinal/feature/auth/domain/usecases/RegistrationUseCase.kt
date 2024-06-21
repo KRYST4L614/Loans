@@ -1,6 +1,6 @@
 package com.example.afinal.feature.auth.domain.usecases
 
-import com.example.afinal.feature.auth.domain.AuthRepository
+import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.auth.domain.entities.LoginUser
 import javax.inject.Inject
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,6 +31,13 @@ class OnboardingFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<OnboardingViewModel> { viewModelFactory }
+
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.openHomePage()
+            }
+        }
 
     override fun onAttach(context: Context) {
         DaggerOnboardingComponent
@@ -95,9 +103,11 @@ class OnboardingFragment : Fragment() {
                     0 -> {
                         binding.backButton.visibility = View.INVISIBLE
                     }
+
                     2 -> {
                         binding.nextButton.text = "Закрыть"
                     }
+
                     else -> {
                         binding.backButton.visibility = View.VISIBLE
                     }
@@ -109,10 +119,13 @@ class OnboardingFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
+
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        onBackPressedCallback.remove()
         _binding = null
     }
 }

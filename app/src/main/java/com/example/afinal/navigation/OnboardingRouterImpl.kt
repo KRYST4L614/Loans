@@ -8,5 +8,5 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import javax.inject.Inject
 
 class OnboardingRouterImpl @Inject constructor(private val router: Router) : OnboardingRouter {
-    override fun openHome() = router.replaceScreen(getHomeScreen())
+    override fun openHome() = router.newRootScreen(getHomeScreen())
 }

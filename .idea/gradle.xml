@@ -24,6 +24,7 @@
             <option value="$PROJECT_DIR$/shared/fragmentDependencies" />
             <option value="$PROJECT_DIR$/shared/viewModelFactory" />
             <option value="$PROJECT_DIR$/shared/viewPagerAdapter" />
+            <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

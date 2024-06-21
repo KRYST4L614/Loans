@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.com.squareup.retrofit2.gson)
     implementation(libs.com.squareup.okhttp3.logging.interceptor)
     implementation(libs.com.squareup.retrofit2.scalars)
+    implementation(libs.androidx.security.crypto)
 
     implementation(project(":feature:auth"))
     implementation(project(":feature:onboarding"))

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.afinal.databinding.ActivityMainBinding
 import com.example.afinal.feature.auth.getAuthScreen
+import com.example.afinal.feature.home.getHomeScreen
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {
-            router.newRootScreen(getAuthScreen())
+            router.newRootScreen(getHomeScreen())
         }
     }
 

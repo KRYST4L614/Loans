@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.feature.auth.databinding.AuthBottomSheetBinding
@@ -27,18 +29,8 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
     private var _binding: AuthBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<AuthViewModel> { viewModelFactory }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        DaggerAuthComponent
-            .builder()
-            .dependencies(FragmentDependenciesStore.dependencies)
-            .build()
-            .inject(this)
-    }
+    private val viewModel by viewModels<AuthViewModel>(ownerProducer = { requireParentFragment() })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,34 +48,57 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.passwordEditText.transformationMethod = PasswordTransformation()
-        binding.tableLayout.addOnTabSelectedListener(
-            object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    if (tab?.position == 0) {
-                        binding.repeatPasswordInputLayout.isVisible = false
-                        binding.button.text = "Войти"
-                    } else {
-                        binding.repeatPasswordInputLayout.isVisible = true
-                        binding.button.text = "Зарегистрироваться"
+
+        with(binding) {
+            passwordEditText.transformationMethod = PasswordTransformation()
+            tableLayout.addOnTabSelectedListener(
+                object : TabLayout.OnTabSelectedListener {
+                    override fun onTabSelected(tab: TabLayout.Tab) {
+                        if (tab.position == 0) {
+                            binding.repeatPasswordInputLayout.isVisible = false
+                            binding.button.text = "Войти"
+                        } else {
+                            binding.repeatPasswordInputLayout.isVisible = true
+                            binding.button.text = "Зарегистрироваться"
+                        }
+                        viewModel.handleTabChange(position = tab.position)
                     }
+
+                    override fun onTabUnselected(tab: TabLayout.Tab) {}
+                    override fun onTabReselected(tab: TabLayout.Tab) {}
                 }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-        )
-
-        binding.button.setOnClickListener {
-            viewModel.login(
-                binding.loginEditText.text.toString(),
-                binding.passwordEditText.text.toString()
             )
+
+            button.setOnClickListener {
+                viewModel.handleButtonClick(
+                    binding.loginEditText.text,
+                    binding.passwordEditText.text
+                )
+            }
+
+            loginEditText.doAfterTextChanged {
+                viewModel.checkName(it)
+            }
+
+            passwordEditText.doAfterTextChanged {
+                viewModel.checkPasswords(passwordEditText.text, repeatPasswordEditText.text)
+            }
+
+            repeatPasswordEditText.doAfterTextChanged {
+                viewModel.checkPasswords(passwordEditText.text, repeatPasswordEditText.text)
+            }
         }
 
         viewModel.state.observe(viewLifecycleOwner) {
             if (it is AuthState.Success) {
                 dismiss()
+            } else if (it is AuthState.Content) {
+                binding.loginInputLayout.error = it.nameErrorMessage
+                binding.loginInputLayout.errorIconDrawable = null
+                binding.passwordInputLayout.error = it.passwordErrorMessage
+                binding.passwordInputLayout.errorIconDrawable = null
+                binding.repeatPasswordInputLayout.error = it.repeatedPasswordErrorMessage
+                binding.repeatPasswordInputLayout.errorIconDrawable = null
             }
         }
     }
