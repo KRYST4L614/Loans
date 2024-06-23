@@ -2,7 +2,6 @@ package com.example.afinal.feature.home.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,9 @@ import com.example.afinal.feature.home.presentation.HomeViewModel
 import com.example.afinal.feature.home.presentation.UIState.Content
 import com.example.afinal.feature.home.ui.adapter.LoanItemAdapter
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
+import com.example.afinal.util.toEditable
 import javax.inject.Inject
+import com.example.afinal.component.resources.R as ComponentR
 
 class HomePageFragment : Fragment() {
     companion object {
@@ -80,9 +81,8 @@ class HomePageFragment : Fragment() {
                     fromUser: Boolean
                 ) {
                     if (fromUser) {
-                        binding.sum.text =
-                            Editable.Factory.getInstance()
-                                .newEditable((progress * 100).toString() + " ₽")
+                        sum.text =
+                            getString(ComponentR.string.sum).format(progress * 100).toEditable()
                     }
                     sumMessage.text =
                         if (progress * 100 < 500) getString(R.string.l_bound_sum) else null
