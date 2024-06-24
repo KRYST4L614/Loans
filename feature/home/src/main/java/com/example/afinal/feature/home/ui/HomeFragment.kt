@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
+import com.example.afinal.feature.home.LocalCiceroneHolder
 import com.example.afinal.feature.home.R
 import com.example.afinal.feature.home.databinding.FragmentHomeBinding
 import com.example.afinal.feature.home.di.DaggerHomeComponent
 import com.example.afinal.feature.home.presentation.HomeViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
-import com.example.afinal.shared.viewPagerAdapter.ViewPagerAdapter
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
@@ -25,6 +26,12 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var navigatorHolder: LocalCiceroneHolder
+    private val navigator by lazy {
+        AppNavigator(requireActivity(), R.id.frameLayout, childFragmentManager)
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -52,7 +59,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
         setupTableLayout()
-        setupViewPager()
+//        setupViewPager()
     }
 
     private fun setupMenu() {
@@ -62,34 +69,34 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupViewPager() {
-        with(binding) {
-            viewPager.adapter = ViewPagerAdapter(
-                childFragmentManager,
-                lifecycle,
-                viewModel.viewPagerFragments
-            )
-
-            viewPager.isUserInputEnabled = false
-
-            viewPager.registerOnPageChangeCallback(
-                object : ViewPager2.OnPageChangeCallback() {
-                    override fun onPageSelected(position: Int) {
-                        super.onPageSelected(position)
-                        binding.toolbar.title =
-                            getString(if (position == 0) R.string.home else R.string.menu)
-                        binding.tableLayout.getTabAt(position)?.select()
-                    }
-                }
-            )
-        }
-    }
+//    private fun setupViewPager() {
+//        with(binding) {
+//            viewPager.adapter = ViewPagerAdapter(
+//                childFragmentManager,
+//                lifecycle,
+//                viewModel.viewPagerFragments
+//            )
+//
+//            viewPager.isUserInputEnabled = false
+//
+//            viewPager.registerOnPageChangeCallback(
+//                object : ViewPager2.OnPageChangeCallback() {
+//                    override fun onPageSelected(position: Int) {
+//                        super.onPageSelected(position)
+//                        binding.toolbar.title =
+//                            getString(if (position == 0) R.string.home else R.string.menu)
+//                        binding.tableLayout.getTabAt(position)?.select()
+//                    }
+//                }
+//            )
+//        }
+//    }
 
     private fun setupTableLayout() {
         with(binding) {
             tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    viewPager.currentItem = tab!!.position
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    viewModel.handleTabChange(tab.position)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -100,8 +107,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onResume() {
+        super.onResume()
+        navigatorHolder.getCicerone().getNavigatorHolder().setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        navigatorHolder.getCicerone().getNavigatorHolder().removeNavigator()
         _binding = null
     }
 }

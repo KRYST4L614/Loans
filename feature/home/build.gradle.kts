@@ -53,6 +53,7 @@ dependencies {
     ksp(libs.com.google.dagger.compiler)
     implementation(libs.com.squareup.retrofit2)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.com.github.terrakok.cicerone)
 
     implementation(project(":component:resources"))
     implementation(project(":shared:fragmentDependencies"))

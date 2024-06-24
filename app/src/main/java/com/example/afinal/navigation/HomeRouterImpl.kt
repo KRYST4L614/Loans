@@ -17,6 +17,8 @@ class HomeRouterImpl @Inject constructor(private val router: Router) : HomeRoute
 
     override fun getHomePageFragment(): Fragment = HomePageFragment.newInstance()
 
+    override fun openHomePage() = router.navigateTo(get)
+
     override fun openOnboarding() = router.navigateTo(getOnboardingScreen())
 
     override fun openSupport() = router.navigateTo(getSupportScreen())

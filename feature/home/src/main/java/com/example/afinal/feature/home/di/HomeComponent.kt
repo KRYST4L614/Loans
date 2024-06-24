@@ -5,8 +5,10 @@ import com.example.afinal.feature.home.ui.HomePageFragment
 import com.example.afinal.feature.home.ui.MenuPageFragment
 import com.example.afinal.shared.fragmentDependencies.FragmentDependencies
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(dependencies = [FragmentDependencies::class])
+@Singleton
+@Component(dependencies = [FragmentDependencies::class], modules = [LocalNavigationModule::class])
 interface HomeComponent {
 
     fun inject(fragment: HomeFragment)

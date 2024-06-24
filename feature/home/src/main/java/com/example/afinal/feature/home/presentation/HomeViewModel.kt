@@ -37,11 +37,14 @@ class HomeViewModel @Inject constructor(
         _state.value = Loading
         val response = repository.getLoans()
         if (response is NetworkResponse.Success) {
-            _state.value = Content(response.content, "Главная")
+            _state.value = Content(response.content, "Главная", 0)
         }
     }
 
     fun handleTabChange(position: Int) {
-        _state.value = Content(emptyList(), if (position == 0) "Главная" else "Меню")
+        if (position == 0) {
+            router.op()
+        }
+        _state.value = Content(emptyList(), if (position == 0) "Главная" else "Меню", 0)
     }
 }
