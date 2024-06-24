@@ -67,10 +67,7 @@ class HomeFragment : Fragment() {
             viewPager.adapter = ViewPagerAdapter(
                 childFragmentManager,
                 lifecycle,
-                listOf(
-                    HomePageFragment::newInstance,
-                    MenuPageFragment::newInstance
-                )
+                viewModel.viewPagerFragments
             )
 
             viewPager.isUserInputEnabled = false
