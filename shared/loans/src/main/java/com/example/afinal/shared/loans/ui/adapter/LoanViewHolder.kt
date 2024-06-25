@@ -1,11 +1,13 @@
-package com.example.afinal.feature.homepage.ui.adapter
+package com.example.afinal.shared.loans.ui.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.afinal.feature.homepage.R
-import com.example.afinal.feature.homepage.databinding.LoanItemBinding
-import com.example.afinal.feature.homepage.domain.entities.Loan
-import com.example.afinal.feature.homepage.domain.entities.Status
+import com.example.afinal.shared.loans.R
+import com.example.afinal.shared.loans.databinding.LoanItemBinding
+import com.example.afinal.shared.loans.domain.entities.Loan
+import com.example.afinal.shared.loans.domain.entities.Status.APPROVED
+import com.example.afinal.shared.loans.domain.entities.Status.REGISTERED
+import com.example.afinal.shared.loans.domain.entities.Status.REJECTED
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
@@ -33,17 +35,17 @@ class LoanViewHolder(
             loanId.text = root.context.getString(R.string.loan_id).format(loan.id)
             date.text = SimpleDateFormat("d MMMM, EEE").format(loan.date)
             status.text = when (loan.state) {
-                Status.APPROVED -> {
+                APPROVED -> {
                     status.setTextColor(itemView.context.getColor(R.color.indicator_positive))
                     root.context.getString(R.string.loan_approved)
                 }
 
-                Status.REGISTERED -> {
+                REGISTERED -> {
                     status.setTextColor(root.context.getColor(R.color.indicator_attention))
                     root.context.getString(R.string.loan_registered)
                 }
 
-                Status.REJECTED -> {
+                REJECTED -> {
                     status.setTextColor(root.context.getColor(ComponentR.color.onSecondary))
                     root.context.getString(R.string.loan_rejected)
                 }

@@ -21,10 +21,10 @@ class HomeViewModel @Inject constructor(
     fun handleTabChange(position: Int = lastTabPosition) {
         if (position == 0) {
             localRouter.openHomePage()
-            _state.value = HomeState.Content("Главная", position)
+            _state.value = HomeState.Content(position)
         } else {
             localRouter.openMenuPage()
-            _state.value = HomeState.Content("Меню", position)
+            _state.value = HomeState.Content(position)
         }
         lastTabPosition = position
     }

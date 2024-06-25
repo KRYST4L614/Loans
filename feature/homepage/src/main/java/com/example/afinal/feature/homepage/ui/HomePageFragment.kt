@@ -17,8 +17,8 @@ import com.example.afinal.feature.homepage.databinding.FragmentHomePageBinding
 import com.example.afinal.feature.homepage.di.DaggerHomePageComponent
 import com.example.afinal.feature.homepage.presentation.HomePageViewModel
 import com.example.afinal.feature.homepage.presentation.UIState.Content
-import com.example.afinal.feature.homepage.ui.adapter.LoanItemAdapter
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
+import com.example.afinal.shared.loans.ui.adapter.LoanItemAdapter
 import com.example.afinal.util.toEditable
 import javax.inject.Inject
 import com.example.afinal.component.resources.R as ComponentR
@@ -57,6 +57,7 @@ class HomePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupSlider()
         setupLoansList()
+        setupMenu()
 
         viewModel.state.observe(viewLifecycleOwner) {
             if (it is Content) {
@@ -68,6 +69,10 @@ class HomePageFragment : Fragment() {
 
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.getLoans()
+        }
+
+        binding.myLoansCard.button.setOnClickListener {
+            viewModel.openMyLoansPage()
         }
     }
 
@@ -115,6 +120,13 @@ class HomePageFragment : Fragment() {
                 object : LinearLayoutManager(requireContext()) {
                     override fun canScrollVertically() = false
                 }
+        }
+    }
+
+    private fun setupMenu() {
+        binding.toolbar.menu.findItem(ComponentR.id.info).setOnMenuItemClickListener {
+            viewModel.openOnboarding()
+            true
         }
     }
 

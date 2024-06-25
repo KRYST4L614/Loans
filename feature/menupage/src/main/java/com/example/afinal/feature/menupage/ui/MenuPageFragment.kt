@@ -52,6 +52,7 @@ class MenuPageFragment : Fragment() {
         binding.listView.adapter =
             MenuItemAdapter(resources.getStringArray(R.array.menu_items).toList()) {
                 when (it) {
+                    "Мои займы" -> viewModel.openMyLoansPage()
                     "Помощь" -> viewModel.openSupport()
                     "Предложения для вас" -> viewModel.openSpecial()
                     "Язык" -> viewModel.openLanguage()
@@ -60,6 +61,13 @@ class MenuPageFragment : Fragment() {
             }
         binding.listView.layoutManager = object : LinearLayoutManager(requireContext()) {
             override fun canScrollVertically() = false
+        }
+    }
+
+    private fun setupMenu() {
+        binding.toolbar.menu.findItem(com.example.afinal.component.resources.R.id.info).setOnMenuItemClickListener {
+            viewModel.openOnboarding()
+            true
         }
     }
 

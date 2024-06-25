@@ -10,4 +10,7 @@ class MenuPageViewModel @Inject constructor(
     fun openSupport() = router.openSupport()
     fun openLanguage() = router.openLanguage()
     fun openSpecial() = router.openSpecial()
+    fun openOnboarding() = router.openOnboarding()
+
+    fun openMyLoansPage() = router.openMyLoansPage()
 }

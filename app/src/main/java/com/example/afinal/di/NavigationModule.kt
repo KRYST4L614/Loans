@@ -6,6 +6,7 @@ import com.example.afinal.feature.home.HomeRouter
 import com.example.afinal.feature.home.LocalHomeRouter
 import com.example.afinal.feature.homepage.HomePageRouter
 import com.example.afinal.feature.menupage.MenuPageRouter
+import com.example.afinal.feature.myloanspage.MyLoansPageRouter
 import com.example.afinal.feature.onboarding.OnboardingRouter
 import com.example.afinal.feature.special.SpecialRouter
 import com.example.afinal.feature.support.SupportRouter
@@ -16,6 +17,7 @@ import com.example.afinal.navigation.HomeRouterImpl
 import com.example.afinal.navigation.LanguageRouterImpl
 import com.example.afinal.navigation.LocalHomeRouterImpl
 import com.example.afinal.navigation.MenuPageRouterImpl
+import com.example.afinal.navigation.MyLoansPageRouterImpl
 import com.example.afinal.navigation.OnboardingRouterImpl
 import com.example.afinal.navigation.SpecialRouterImpl
 import com.example.afinal.navigation.SupportRouterImpl
@@ -89,6 +91,9 @@ interface NavigationModule {
 
     @Binds
     fun bindLocalHomeRouter(impl: LocalHomeRouterImpl): LocalHomeRouter
+
+    @Binds
+    fun bindMyLoansPageRouter(impl: MyLoansPageRouterImpl): MyLoansPageRouter
 
 }
 

@@ -1,11 +1,11 @@
-package com.example.afinal.feature.homepage.ui.adapter
+package com.example.afinal.shared.loans.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.afinal.feature.homepage.databinding.LoanItemBinding
-import com.example.afinal.feature.homepage.domain.entities.Loan
+import com.example.afinal.shared.loans.databinding.LoanItemBinding
+import com.example.afinal.shared.loans.domain.entities.Loan
 
 class LoanItemAdapter(
     private var data: List<Loan>

@@ -1,4 +1,4 @@
-package com.example.afinal.feature.homepage.domain
+package com.example.afinal.shared.loans.domain
 
 import javax.inject.Inject
 

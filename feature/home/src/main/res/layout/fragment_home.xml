@@ -7,15 +7,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/backgroundColor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/home_menu"
-        app:title="Главная" />
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"

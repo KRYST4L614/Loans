@@ -1,4 +1,4 @@
-package com.example.afinal.feature.homepage.presentation
+package com.example.afinal.feature.myloanspage.presentation
 
 import com.example.afinal.shared.loans.domain.entities.Loan
 

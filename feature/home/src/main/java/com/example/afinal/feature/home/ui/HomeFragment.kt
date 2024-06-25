@@ -53,7 +53,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
-        setupMenu()
         setupTabLayout()
         viewModel.handleTabChange()
         return binding.root
@@ -62,15 +61,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.state.observe(viewLifecycleOwner) {
-            binding.toolbar.title = (it as HomeState.Content).title
-            binding.tabLayout.getTabAt(it.selectedTab)?.select()
-        }
-    }
-
-    private fun setupMenu() {
-        binding.toolbar.menu.findItem(R.id.info).setOnMenuItemClickListener {
-            viewModel.openOnboarding()
-            true
+            binding.tabLayout.getTabAt((it as HomeState.Content).selectedTab)?.select()
         }
     }
 

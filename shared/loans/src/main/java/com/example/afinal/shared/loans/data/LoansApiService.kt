@@ -1,6 +1,6 @@
-package com.example.afinal.feature.homepage.data
+package com.example.afinal.shared.loans.data
 
-import com.example.afinal.feature.homepage.domain.entities.Loan
+import com.example.afinal.shared.loans.domain.entities.Loan
 import retrofit2.Call
 import retrofit2.http.GET
 

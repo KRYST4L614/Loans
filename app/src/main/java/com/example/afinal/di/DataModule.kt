@@ -9,9 +9,9 @@ import com.example.afinal.feature.auth.data.AuthTokenRepositoryImpl
 import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.auth.domain.repositories.AuthTokenRepository
 import com.example.afinal.feature.homepage.HomePageRouter
-import com.example.afinal.feature.homepage.data.LoansApiService
-import com.example.afinal.feature.homepage.data.LoansRepositoryImpl
-import com.example.afinal.feature.homepage.domain.LoansRepository
+import com.example.afinal.shared.loans.data.LoansApiService
+import com.example.afinal.shared.loans.data.LoansRepositoryImpl
+import com.example.afinal.shared.loans.domain.LoansRepository
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module

@@ -1,7 +1,7 @@
-package com.example.afinal.feature.homepage.data
+package com.example.afinal.shared.loans.data
 
-import com.example.afinal.feature.homepage.domain.LoansRepository
-import com.example.afinal.feature.homepage.domain.entities.Loan
+import com.example.afinal.shared.loans.domain.entities.Loan
+import com.example.afinal.shared.loans.domain.LoansRepository
 import com.example.afinal.util.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

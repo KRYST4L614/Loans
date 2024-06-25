@@ -1,4 +1,4 @@
-package com.example.afinal.feature.homepage.domain.entities
+package com.example.afinal.shared.loans.domain.entities
 
 import java.util.Date
 
