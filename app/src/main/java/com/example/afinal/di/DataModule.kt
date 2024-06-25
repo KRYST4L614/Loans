@@ -9,6 +9,9 @@ import com.example.afinal.feature.auth.data.AuthTokenRepositoryImpl
 import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.auth.domain.repositories.AuthTokenRepository
 import com.example.afinal.feature.homepage.HomePageRouter
+import com.example.afinal.feature.loandetails.data.LoanDetailsApiService
+import com.example.afinal.feature.loandetails.data.LoanDetailsRepositoryImpl
+import com.example.afinal.feature.loandetails.domain.LoanDetailsRepository
 import com.example.afinal.shared.loans.data.LoansApiService
 import com.example.afinal.shared.loans.data.LoansRepositoryImpl
 import com.example.afinal.shared.loans.domain.LoansRepository
@@ -98,6 +101,14 @@ interface DataModule {
         @Provides
         fun provideLoansRepository(service: LoansApiService): LoansRepository =
             LoansRepositoryImpl(service, Dispatchers.IO)
+
+        @Provides
+        fun provideLoanDetailsApiService(retrofit: Retrofit): LoanDetailsApiService =
+            retrofit.create(LoanDetailsApiService::class.java)
+
+        @Provides
+        fun provideLoanDetailsRepository(service: LoanDetailsApiService): LoanDetailsRepository =
+            LoanDetailsRepositoryImpl(service, Dispatchers.IO)
     }
 
     @Binds

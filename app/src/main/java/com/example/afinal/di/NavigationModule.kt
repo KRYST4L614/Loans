@@ -5,6 +5,7 @@ import com.example.afinal.feature.auth.AuthRouter
 import com.example.afinal.feature.home.HomeRouter
 import com.example.afinal.feature.home.LocalHomeRouter
 import com.example.afinal.feature.homepage.HomePageRouter
+import com.example.afinal.feature.loandetails.LoanDetailsRouter
 import com.example.afinal.feature.menupage.MenuPageRouter
 import com.example.afinal.feature.myloanspage.MyLoansPageRouter
 import com.example.afinal.feature.onboarding.OnboardingRouter
@@ -15,6 +16,7 @@ import com.example.afinal.navigation.AuthRouterImpl
 import com.example.afinal.navigation.HomePageRouterImpl
 import com.example.afinal.navigation.HomeRouterImpl
 import com.example.afinal.navigation.LanguageRouterImpl
+import com.example.afinal.navigation.LoanDetailsRouterImpl
 import com.example.afinal.navigation.LocalHomeRouterImpl
 import com.example.afinal.navigation.MenuPageRouterImpl
 import com.example.afinal.navigation.MyLoansPageRouterImpl
@@ -94,6 +96,9 @@ interface NavigationModule {
 
     @Binds
     fun bindMyLoansPageRouter(impl: MyLoansPageRouterImpl): MyLoansPageRouter
+
+    @Binds
+    fun bindLoanDetailsRouter(impl: LoanDetailsRouterImpl): LoanDetailsRouter
 
 }
 

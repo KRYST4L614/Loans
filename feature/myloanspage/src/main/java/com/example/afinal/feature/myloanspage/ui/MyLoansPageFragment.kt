@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.feature.myloanspage.databinding.FragmentLoansBinding
 import com.example.afinal.feature.myloanspage.di.DaggerMyLoansPageComponent
 import com.example.afinal.feature.myloanspage.presentation.MyLoansPageViewModel
-import com.example.afinal.feature.myloanspage.presentation.UIState
 import com.example.afinal.feature.myloanspage.presentation.UIState.Content
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import com.example.afinal.shared.loans.ui.adapter.LoanItemAdapter
@@ -61,16 +59,17 @@ class MyLoansPageFragment : Fragment() {
         }
 
         viewModel.state.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Content -> {
                     observeContentState(it)
                 }
+
                 else -> {}
             }
         }
         viewModel.getLoans()
 
-        requireActivity().onBackPressedDispatcher.addCallback{
+        requireActivity().onBackPressedDispatcher.addCallback {
             viewModel.close()
             this.remove()
         }
@@ -78,7 +77,7 @@ class MyLoansPageFragment : Fragment() {
 
     private fun setupLoansList() {
         with(binding) {
-            loans.adapter = LoanItemAdapter(emptyList())
+            loans.adapter = LoanItemAdapter(emptyList(), viewModel::openLoanDetails)
             loans.layoutManager = LinearLayoutManager(requireContext())
         }
     }

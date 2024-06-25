@@ -4,5 +4,5 @@
     <string name="loan_registered">На рассмотрении</string>
     <string name="loan_rejected">Выдан</string>
 
-    <string name="loan_id">№ %1$s</string>
+    <string name="loan_id">№ %1$d</string>
 </resources>

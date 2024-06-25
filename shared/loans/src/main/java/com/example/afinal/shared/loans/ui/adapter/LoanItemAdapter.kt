@@ -8,7 +8,8 @@ import com.example.afinal.shared.loans.databinding.LoanItemBinding
 import com.example.afinal.shared.loans.domain.entities.Loan
 
 class LoanItemAdapter(
-    private var data: List<Loan>
+    private var data: List<Loan>,
+    private val onClick: (loan: Loan) -> Unit
 ) : RecyclerView.Adapter<LoanViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
@@ -32,8 +33,11 @@ class LoanItemAdapter(
     }
 
     override fun onBindViewHolder(holder: LoanViewHolder, position: Int) {
-        data[position].let {
-            holder.bind(it)
+        data[position].let { loan ->
+            holder.bind(loan)
+            holder.itemView.setOnClickListener {
+                onClick(loan)
+            }
         }
     }
 }

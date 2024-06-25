@@ -18,12 +18,15 @@
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/homepage" />
             <option value="$PROJECT_DIR$/feature/language" />
+            <option value="$PROJECT_DIR$/feature/loandetails" />
             <option value="$PROJECT_DIR$/feature/menupage" />
+            <option value="$PROJECT_DIR$/feature/myloanspage" />
             <option value="$PROJECT_DIR$/feature/onboarding" />
             <option value="$PROJECT_DIR$/feature/special" />
             <option value="$PROJECT_DIR$/feature/support" />
             <option value="$PROJECT_DIR$/shared" />
             <option value="$PROJECT_DIR$/shared/fragmentDependencies" />
+            <option value="$PROJECT_DIR$/shared/loans" />
             <option value="$PROJECT_DIR$/shared/viewModelFactory" />
             <option value="$PROJECT_DIR$/shared/viewPagerAdapter" />
             <option value="$PROJECT_DIR$/util" />

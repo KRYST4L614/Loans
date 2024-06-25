@@ -8,6 +8,7 @@ import com.example.afinal.feature.homepage.HomePageRouter
 import com.example.afinal.feature.homepage.presentation.UIState.Content
 import com.example.afinal.feature.homepage.presentation.UIState.Loading
 import com.example.afinal.shared.loans.domain.GetLoansUseCase
+import com.example.afinal.shared.loans.domain.entities.Loan
 import com.example.afinal.util.NetworkResponse
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,6 +24,8 @@ class HomePageViewModel @Inject constructor(
     fun openOnboarding() = router.openOnboarding()
 
     fun openMyLoansPage() = router.openMyLoans()
+
+    fun openLoanDetails(loan: Loan) = router.openLoanDetails(loan)
 
     fun getLoans() = viewModelScope.launch {
         _state.value = Loading

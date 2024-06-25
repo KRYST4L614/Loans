@@ -1,5 +1,8 @@
 package com.example.afinal.shared.loans.domain.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 import java.util.Date
 
 enum class Status {
@@ -8,6 +11,7 @@ enum class Status {
     REJECTED
 }
 
+@Parcelize
 data class Loan(
     val amount: Double,
     val date: Date,
@@ -18,4 +22,4 @@ data class Loan(
     val period: Int,
     val phoneNumber: String,
     val state: Status
-)
+) : Parcelable

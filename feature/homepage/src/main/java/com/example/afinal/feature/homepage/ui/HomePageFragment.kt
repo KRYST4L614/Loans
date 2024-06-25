@@ -115,7 +115,7 @@ class HomePageFragment : Fragment() {
 
     private fun setupLoansList() {
         with(binding) {
-            myLoansCard.loans.adapter = LoanItemAdapter(emptyList())
+            myLoansCard.loans.adapter = LoanItemAdapter(emptyList(), viewModel::openLoanDetails)
             myLoansCard.loans.layoutManager =
                 object : LinearLayoutManager(requireContext()) {
                     override fun canScrollVertically() = false
