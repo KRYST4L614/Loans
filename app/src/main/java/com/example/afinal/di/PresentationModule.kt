@@ -6,6 +6,8 @@ import com.example.afinal.MainViewModel
 import com.example.afinal.feature.addresses.presentation.AddressesViewModel
 import com.example.afinal.feature.auth.presentation.AuthViewModel
 import com.example.afinal.feature.home.presentation.HomeViewModel
+import com.example.afinal.feature.homepage.presentation.HomePageViewModel
+import com.example.afinal.feature.menupage.presentation.MenuPageViewModel
 import com.example.afinal.feature.onboarding.presentation.OnboardingViewModel
 import com.example.afinal.feature.special.presentation.SpecialViewModel
 import com.example.afinal.feature.support.presentation.SupportViewModel
@@ -57,6 +59,16 @@ interface PresentationModule {
     @IntoMap
     @ViewModelKey(AddressesViewModel::class)
     fun bindAddressesViewModel(viewModel: AddressesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomePageViewModel::class)
+    fun bindHomePageViewModel(viewModel: HomePageViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MenuPageViewModel::class)
+    fun bindMenuPageViewModel(viewModel: MenuPageViewModel): ViewModel
 
     @Binds
     fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

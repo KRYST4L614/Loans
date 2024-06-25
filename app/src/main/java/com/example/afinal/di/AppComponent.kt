@@ -1,11 +1,10 @@
 package com.example.afinal.di
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.MainActivity
 import com.example.afinal.shared.fragmentDependencies.FragmentDependencies
 import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.BindsInstance
 import dagger.Component

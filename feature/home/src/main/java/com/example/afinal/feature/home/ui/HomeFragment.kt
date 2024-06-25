@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.afinal.feature.home.LocalCiceroneHolder
+import com.example.afinal.shared.fragmentDependencies.LocalNavigationHolder
 import com.example.afinal.feature.home.R
 import com.example.afinal.feature.home.databinding.FragmentHomeBinding
 import com.example.afinal.feature.home.di.DaggerHomeComponent
+import com.example.afinal.feature.home.presentation.HomeState
 import com.example.afinal.feature.home.presentation.HomeViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
-import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
@@ -28,7 +28,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var navigatorHolder: LocalCiceroneHolder
+    lateinit var localNavigationHolder: LocalNavigationHolder
+
     private val navigator by lazy {
         AppNavigator(requireActivity(), R.id.frameLayout, childFragmentManager)
     }
@@ -52,14 +53,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
+        setupMenu()
+        setupTabLayout()
+        viewModel.handleTabChange()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupMenu()
-        setupTableLayout()
-//        setupViewPager()
+        viewModel.state.observe(viewLifecycleOwner) {
+            binding.toolbar.title = (it as HomeState.Content).title
+            binding.tabLayout.getTabAt(it.selectedTab)?.select()
+        }
     }
 
     private fun setupMenu() {
@@ -69,39 +74,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-//    private fun setupViewPager() {
-//        with(binding) {
-//            viewPager.adapter = ViewPagerAdapter(
-//                childFragmentManager,
-//                lifecycle,
-//                viewModel.viewPagerFragments
-//            )
-//
-//            viewPager.isUserInputEnabled = false
-//
-//            viewPager.registerOnPageChangeCallback(
-//                object : ViewPager2.OnPageChangeCallback() {
-//                    override fun onPageSelected(position: Int) {
-//                        super.onPageSelected(position)
-//                        binding.toolbar.title =
-//                            getString(if (position == 0) R.string.home else R.string.menu)
-//                        binding.tableLayout.getTabAt(position)?.select()
-//                    }
-//                }
-//            )
-//        }
-//    }
-
-    private fun setupTableLayout() {
+    private fun setupTabLayout() {
         with(binding) {
-            tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     viewModel.handleTabChange(tab.position)
                 }
 
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabUnselected(tab: TabLayout.Tab) {}
 
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab) {}
 
             })
         }
@@ -109,12 +91,16 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        navigatorHolder.getCicerone().getNavigatorHolder().setNavigator(navigator)
+        localNavigationHolder.navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        navigatorHolder.getCicerone().getNavigatorHolder().removeNavigator()
+        localNavigationHolder.navigatorHolder.removeNavigator()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

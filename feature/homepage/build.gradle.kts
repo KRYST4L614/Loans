@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.afinal.feature.home"
+    namespace = "com.example.afinal.feature.homepage"
     compileSdk = 34
 
     defaultConfig {

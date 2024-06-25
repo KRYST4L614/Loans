@@ -39,4 +39,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.com.github.terrakok.cicerone)
+    implementation(libs.com.google.dagger)
+    ksp(libs.com.google.dagger.compiler)
 }

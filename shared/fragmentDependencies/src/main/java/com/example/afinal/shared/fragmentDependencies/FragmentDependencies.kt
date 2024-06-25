@@ -7,7 +7,5 @@ import com.github.terrakok.cicerone.Router
 
 interface FragmentDependencies {
     val viewModelFactory: ViewModelProvider.Factory
-    val cicerone: Cicerone<Router>
-    val router: Router
-    val navigationHolder: NavigatorHolder
+    val localNavigationHolder: LocalNavigationHolder
 }

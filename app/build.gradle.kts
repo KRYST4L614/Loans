@@ -66,6 +66,8 @@ dependencies {
     implementation(project(":feature:auth"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:homepage"))
+    implementation(project(":feature:menupage"))
     implementation(project(":feature:language"))
     implementation(project(":feature:special"))
     implementation(project(":feature:support"))

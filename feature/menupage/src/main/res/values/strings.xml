@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_items">
+        <item>Мои займы</item>
+        <item>Предложения для вас</item>
+        <item>Отделения банка</item>
+        <item>Помощь</item>
+        <item>Язык</item>
+        <item>Выйти</item>
+    </string-array>
+</resources>

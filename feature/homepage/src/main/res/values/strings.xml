@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loan_approved">Одобрен</string>
+    <string name="loan_registered">На рассмотрении</string>
+    <string name="loan_rejected">Выдан</string>
+
+    <string name="loan_id">№ %1$s</string>
+
+    <string name="u_bound_sum">Максимум 10 000 ₽</string>
+    <string name="l_bound_sum">Минимум 500 ₽</string>
+</resources>

@@ -8,10 +8,10 @@ import com.example.afinal.feature.auth.data.AuthRepositoryImpl
 import com.example.afinal.feature.auth.data.AuthTokenRepositoryImpl
 import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.auth.domain.repositories.AuthTokenRepository
-import com.example.afinal.feature.home.HomeRouter
-import com.example.afinal.feature.home.data.LoansApiService
-import com.example.afinal.feature.home.data.LoansRepositoryImpl
-import com.example.afinal.feature.home.domain.LoansRepository
+import com.example.afinal.feature.homepage.HomePageRouter
+import com.example.afinal.feature.homepage.data.LoansApiService
+import com.example.afinal.feature.homepage.data.LoansRepositoryImpl
+import com.example.afinal.feature.homepage.domain.LoansRepository
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -35,7 +35,7 @@ interface DataModule {
         @Provides
         fun provideRetrofit(
             authTokenRepository: AuthTokenRepository,
-            router: HomeRouter
+            router: HomePageRouter
         ): Retrofit {
 
             val interceptor = HttpLoggingInterceptor()

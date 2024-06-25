@@ -11,15 +11,6 @@
     <string name="arranged_loans_onboarding_body">На главном экране приложения отображается список оформленных займов.</string>
     <string name="arranged_loans_onboarding_title">Оформленные займы</string>
 
-    <string-array name="menu_items">
-        <item>Мои займы</item>
-        <item>Предложения для вас</item>
-        <item>Отделения банка</item>
-        <item>Помощь</item>
-        <item>Язык</item>
-        <item>Выйти</item>
-    </string-array>
-
 
     <string-array name="language_items">
         <item>Русский</item>
@@ -30,13 +21,4 @@
 
     <string name="menu">Меню</string>
     <string name="home">Главная</string>
-
-    <string name="loan_approved">Одобрен</string>
-    <string name="loan_registered">На рассмотрении</string>
-    <string name="loan_rejected">Выдан</string>
-
-    <string name="loan_id">№ %1$s</string>
-
-    <string name="u_bound_sum">Максимум 10 000 ₽</string>
-    <string name="l_bound_sum">Минимум 500 ₽</string>
 </resources>
