@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="your_data">Ваши данные</string>
+    <string name="loan_processing">Оформление займа</string>
+    <string name="request_loan_info">После оформления заявки на займ, банк проведет анализ вашей кредитной истории</string>
+    <string name="request_loan_button">Оформить займ</string>
+    <string name="invalid_phone">Такого номера не существует</string>
+    <string name="invalid_name">Только русские буквы</string>
+    <string name="empty_name">Имя не может быть пустым</string>
+    <string name="empty_last_name">Фамилия не может быть пустой</string>
+    <string name="empty_phone">Номер телефона не может быть пустым</string>
+</resources>

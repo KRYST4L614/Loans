@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -46,8 +47,17 @@ class SupportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
         binding.toolbar.setNavigationOnClickListener {
             viewModel.close()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            viewModel.close()
+            this.remove()
         }
     }
 

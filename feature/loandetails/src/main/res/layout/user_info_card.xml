@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/backgroundColor"
+    app:cardCornerRadius="16dp">
+
+    <include
+        android:id="@+id/userInfoCardThumbnail"
+        layout="@layout/user_info_card_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userInfoConstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/nameTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/name"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="marquee"
+            android:gravity="end"
+            android:maxLines="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/nameTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nameTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Иван" />
+
+        <TextView
+            android:id="@+id/secondNameTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/last_name"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameTitle" />
+
+        <TextView
+            android:id="@+id/secondName"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:gravity="end"
+            android:maxLines="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/secondNameTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/secondNameTitle"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="Петров" />
+
+        <TextView
+            android:id="@+id/phoneTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/phone"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondNameTitle" />
+
+        <TextView
+            android:id="@+id/phone"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/phoneTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/secondName"
+            tools:text="+7 923 145-88-90" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

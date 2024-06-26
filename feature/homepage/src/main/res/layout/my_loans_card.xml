@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,33 +7,46 @@
     android:background="?attr/backgroundColor"
     app:cardCornerRadius="16dp">
 
+    <include
+        android:id="@+id/myLoansCardThumbnail"
+        layout="@layout/my_loans_card_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <LinearLayout
+        android:id="@+id/myLoansCardLinLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/loans"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            tools:itemCount="3"
-            tools:listitem="@layout/loan_item" />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/loans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/loan_item" />
+        </androidx.core.widget.NestedScrollView>
 
         <Button
             android:id="@+id/button"
-            style="@style/btn_style"
+            style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:backgroundTint="?attr/colorSecondary"
             android:paddingHorizontal="14dp"
             android:paddingVertical="13dp"
-            android:text="Посмотреть все"
+            android:text="@string/see_all_loans_button"
             android:textAllCaps="false"
             android:textColor="?attr/colorOnPrimary"
             app:cornerRadius="8dp" />
     </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

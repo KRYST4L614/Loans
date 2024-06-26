@@ -13,7 +13,8 @@
         android:background="?attr/backgroundColor"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_with_info"
-        app:title="Меню" />
+        app:title="@string/menu"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"

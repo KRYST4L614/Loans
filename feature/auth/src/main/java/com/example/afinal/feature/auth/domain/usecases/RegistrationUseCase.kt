@@ -1,7 +1,7 @@
 package com.example.afinal.feature.auth.domain.usecases
 
-import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.auth.domain.entities.LoginUser
+import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import javax.inject.Inject
 
 class RegistrationUseCase @Inject constructor(

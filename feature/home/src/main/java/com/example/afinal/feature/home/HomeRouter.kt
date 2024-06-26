@@ -1,5 +1,6 @@
 package com.example.afinal.feature.home
 
 interface HomeRouter {
-    fun openOnboarding()
+    fun openHomePage()
+    fun openMenuPage()
 }

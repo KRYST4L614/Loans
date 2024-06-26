@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.afinal.shared.fragmentDependencies"
+    namespace = "com.example.afinal.shared.fragmentdependencies"
     compileSdk = 34
 
     defaultConfig {

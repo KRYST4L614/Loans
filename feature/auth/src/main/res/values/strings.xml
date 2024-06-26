@@ -2,8 +2,16 @@
 
     <string name="log_in">Вход</string>
     <string name="sign_up">Регистрация</string>
-    <string name="Login">Логин</string>
+    <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="enter">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="only_latin_letters">Только латинские буквы</string>
+    <string name="only_latin_letters_and_numbers">Только латинские буквы</string>
+    <string name="empty_password">Пароль не может быть пустым</string>
+    <string name="empty_login">Логин не может быть пустым</string>
+    <string name="passwords_not_equals">Пароли не совпадают</string>
+    <string name="user_not_found">Пользователя с таким логином и паролем не существует</string>
+    <string name="user_already_exists">Пользователь с таким логином уже зарегистрирован</string>
 </resources>

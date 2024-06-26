@@ -7,12 +7,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:menu="@menu/onboarding_menu"
-        app:title=" "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/close_icon" />
+        app:menu="@menu/menu_with_back_nav"
+        app:navigationIcon="@drawable/close_icon"
+        app:title=" "
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -41,8 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="7dp"
-        android:text="Назад"
-        android:textColor="@color/fontDarkPrimaryInverse"
+        android:text="@string/back_button"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="7dp"
-        android:text="Далее"
-        android:textColor="@color/fontDarkPrimaryInverse"
+        android:text="@string/next_button"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

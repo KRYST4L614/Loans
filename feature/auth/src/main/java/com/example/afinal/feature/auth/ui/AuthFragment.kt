@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.feature.auth.databinding.FragmentAuthBinding
 import com.example.afinal.feature.auth.di.DaggerAuthComponent
-import com.example.afinal.feature.auth.presentation.AuthState
+import com.example.afinal.feature.auth.presentation.AuthState.Error
+import com.example.afinal.feature.auth.presentation.AuthState.Loading
 import com.example.afinal.feature.auth.presentation.AuthViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import javax.inject.Inject
@@ -20,6 +20,7 @@ import javax.inject.Inject
 class AuthFragment : Fragment() {
 
     companion object {
+        private const val BOTTOM_SHEET_TAG = "BOTTOM_SHEET_TAG"
         fun newInstance() = AuthFragment()
     }
 
@@ -50,25 +51,59 @@ class AuthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding) {
-            progress.isVisible = false
-            logo.updatePadding(
-                bottom = (500 * requireContext().resources.displayMetrics.density).toInt(),
-                top = (136 * requireContext().resources.displayMetrics.density).toInt()
-            )
-        }
-        viewModel.state.observe(this) {
 
-        }
+        observeViewModel()
+
         showAuthDialog()
+
+        binding.error.retryButton.setOnClickListener {
+            isErrorShows(false)
+            showAuthDialog()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is Loading -> observeLoadingState()
+                is Error -> observeErrorState(it)
+                else -> {}
+            }
+        }
+    }
+
+    private fun observeLoadingState() {
+        isLoadingShows(true)
+        isErrorShows(false)
+    }
+
+    private fun observeErrorState(error: Error) {
+        binding.error.errorMessage.text = error.errorMessage
+
+        isLoadingShows(false)
+        isErrorShows(true)
+    }
+
+    private fun isErrorShows(shows: Boolean) {
+        with(binding) {
+            error.root.isVisible = shows
+            logo.isVisible = !shows
+        }
+    }
+
+    private fun isLoadingShows(shows: Boolean) {
+        with(binding) {
+            logo.isVisible = !shows
+            loading.root.isVisible = shows
+        }
     }
 
     private fun showAuthDialog() {
-        if (childFragmentManager.findFragmentByTag("")?.isAdded != true) {
+        if (childFragmentManager.findFragmentByTag(BOTTOM_SHEET_TAG)?.isAdded != true) {
             val bs = AuthBottomSheet().apply {
                 isCancelable = false
             }
-            bs.show(childFragmentManager, "")
+            bs.show(childFragmentManager, BOTTOM_SHEET_TAG)
         }
     }
 

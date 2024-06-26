@@ -5,16 +5,24 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.example.afinal.feature.auth.data.AuthApiService
 import com.example.afinal.feature.auth.data.AuthRepositoryImpl
-import com.example.afinal.feature.auth.data.AuthTokenRepositoryImpl
 import com.example.afinal.feature.auth.domain.repositories.AuthRepository
-import com.example.afinal.feature.auth.domain.repositories.AuthTokenRepository
 import com.example.afinal.feature.homepage.HomePageRouter
+import com.example.afinal.feature.homepage.data.LoanConditionsApiService
+import com.example.afinal.feature.homepage.data.LoansConditionRepositoryImpl
+import com.example.afinal.feature.homepage.domain.LoanConditionsRepository
 import com.example.afinal.feature.loandetails.data.LoanDetailsApiService
 import com.example.afinal.feature.loandetails.data.LoanDetailsRepositoryImpl
 import com.example.afinal.feature.loandetails.domain.LoanDetailsRepository
+import com.example.afinal.feature.requestloan.data.RequestLoanApiService
+import com.example.afinal.feature.requestloan.data.RequestLoanRepositoryImpl
+import com.example.afinal.feature.requestloan.domain.RequestLoanRepository
+import com.example.afinal.feature.splash.domain.GetTokenUseCase
 import com.example.afinal.shared.loans.data.LoansApiService
-import com.example.afinal.shared.loans.data.LoansRepositoryImpl
-import com.example.afinal.shared.loans.domain.LoansRepository
+import com.example.afinal.shared.loans.data.repositories.AuthTokenRepositoryImpl
+import com.example.afinal.shared.loans.data.repositories.LoansRepositoryImpl
+import com.example.afinal.shared.loans.domain.repositories.AuthTokenRepository
+import com.example.afinal.shared.loans.domain.repositories.LoansRepository
+import com.example.afinal.shared.resourceprovider.ResourceProvider
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -27,6 +35,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 interface DataModule {
@@ -37,7 +46,7 @@ interface DataModule {
 
         @Provides
         fun provideRetrofit(
-            authTokenRepository: AuthTokenRepository,
+            getTokenUseCase: GetTokenUseCase,
             router: HomePageRouter
         ): Retrofit {
 
@@ -46,7 +55,7 @@ interface DataModule {
 
             val authInterceptor = Interceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
-                authTokenRepository.getToken()?.let {
+                getTokenUseCase()?.let {
                     requestBuilder.addHeader("Authorization", it)
                 }
                 val response = chain.proceed(requestBuilder.build())
@@ -89,11 +98,13 @@ interface DataModule {
         fun provideAuthRepository(service: AuthApiService): AuthRepository =
             AuthRepositoryImpl(service, Dispatchers.IO)
 
+        @Singleton
         @Provides
-        fun provideService(retrofit: Retrofit): AuthApiService {
+        fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
             return retrofit.create(AuthApiService::class.java)
         }
 
+        @Singleton
         @Provides
         fun provideLoansApiService(retrofit: Retrofit): LoansApiService =
             retrofit.create(LoansApiService::class.java)
@@ -102,6 +113,7 @@ interface DataModule {
         fun provideLoansRepository(service: LoansApiService): LoansRepository =
             LoansRepositoryImpl(service, Dispatchers.IO)
 
+        @Singleton
         @Provides
         fun provideLoanDetailsApiService(retrofit: Retrofit): LoanDetailsApiService =
             retrofit.create(LoanDetailsApiService::class.java)
@@ -109,6 +121,28 @@ interface DataModule {
         @Provides
         fun provideLoanDetailsRepository(service: LoanDetailsApiService): LoanDetailsRepository =
             LoanDetailsRepositoryImpl(service, Dispatchers.IO)
+
+        @Singleton
+        @Provides
+        fun provideRequestLoanApiService(retrofit: Retrofit): RequestLoanApiService =
+            retrofit.create(RequestLoanApiService::class.java)
+
+        @Provides
+        fun provideRequestLoanRepository(service: RequestLoanApiService): RequestLoanRepository =
+            RequestLoanRepositoryImpl(service, Dispatchers.IO)
+
+        @Singleton
+        @Provides
+        fun provideLoanConditionsApiService(retrofit: Retrofit): LoanConditionsApiService =
+            retrofit.create(LoanConditionsApiService::class.java)
+
+        @Provides
+        fun provideLoanConditionsRepository(service: LoanConditionsApiService):
+                LoanConditionsRepository = LoansConditionRepositoryImpl(service, Dispatchers.IO)
+
+        @Singleton
+        @Provides
+        fun provideResourceProvider(context: Context) = ResourceProvider(context)
     }
 
     @Binds

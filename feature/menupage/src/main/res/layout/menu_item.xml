@@ -9,14 +9,11 @@
 
     <TextView
         android:id="@+id/name"
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineHeight="18sp"
         android:paddingHorizontal="12dp"
         android:paddingVertical="19dp"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="500"
-        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

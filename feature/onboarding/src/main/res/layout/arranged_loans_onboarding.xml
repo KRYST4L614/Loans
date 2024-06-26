@@ -13,26 +13,22 @@
         android:src="@drawable/arranged_loans_onboarding_image" />
 
     <TextView
+        style="@style/TextLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
         android:lineHeight="28sp"
         android:text="@string/arranged_loans_onboarding_title"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="600"
-        android:textSize="20sp" />
+        android:textFontWeight="600" />
 
     <TextView
+        style="@style/TextMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
-        android:lineHeight="20sp"
-        android:text="@string/arranged_loans_onboarding_body"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="400"
-        android:textSize="16sp" />
+        android:text="@string/arranged_loans_onboarding_body" />
 
 
 </LinearLayout>

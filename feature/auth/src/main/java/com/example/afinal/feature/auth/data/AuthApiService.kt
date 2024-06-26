@@ -4,7 +4,6 @@ import com.example.afinal.feature.auth.domain.entities.LoggedUser
 import com.example.afinal.feature.auth.domain.entities.LoginUser
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface AuthApiService {

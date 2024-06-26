@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <View
+        android:id="@+id/loanIdTitleThumb"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/loanIdThumb"
+        android:layout_width="100dp"
+        android:layout_height="26dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dateTitleThumb"
+        android:layout_width="80dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="4dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loanIdTitleThumb" />
+
+    <View
+        android:id="@+id/dateThumb"
+        android:layout_width="80dp"
+        android:layout_height="26dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loanIdThumb" />
+
+    <View
+        android:id="@+id/periodTitleThumb"
+        android:layout_width="70dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="4dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateTitleThumb" />
+
+    <View
+        android:id="@+id/periodThumb"
+        android:layout_width="50dp"
+        android:layout_height="26dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateThumb" />
+
+    <View
+        android:id="@+id/percentTitleThumb"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="4dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/periodTitleThumb" />
+
+    <View
+        android:id="@+id/percentThumb"
+        android:layout_width="40dp"
+        android:layout_height="26dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/periodThumb" />
+
+    <View
+        android:id="@+id/sumTitleThumb"
+        android:layout_width="40dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="4dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/percentTitleThumb" />
+
+    <View
+        android:id="@+id/sumThumb"
+        android:layout_width="70dp"
+        android:layout_height="26dp"
+        android:background="?attr/colorOnSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/percentThumb" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/onboarding_menu"
-        app:navigationIcon="@drawable/close_icon" />
+        app:menu="@menu/menu_with_back_nav"
+        app:navigationIcon="@drawable/close_icon"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <ImageView
         android:id="@+id/icon"
@@ -28,15 +29,12 @@
 
     <TextView
         android:id="@+id/title"
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
-        android:lineHeight="26sp"
         android:text="@string/support_title"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="500"
-        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/body"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,17 +43,14 @@
 
     <TextView
         android:id="@+id/body"
+        style="@style/TextMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:lineHeight="20sp"
         android:text="@string/support_message"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="400"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/component" />
             <option value="$PROJECT_DIR$/component/resources" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/acceptloan" />
             <option value="$PROJECT_DIR$/feature/addresses" />
             <option value="$PROJECT_DIR$/feature/auth" />
             <option value="$PROJECT_DIR$/feature/home" />
@@ -22,13 +23,17 @@
             <option value="$PROJECT_DIR$/feature/menupage" />
             <option value="$PROJECT_DIR$/feature/myloanspage" />
             <option value="$PROJECT_DIR$/feature/onboarding" />
+            <option value="$PROJECT_DIR$/feature/rejectloan" />
+            <option value="$PROJECT_DIR$/feature/requestloan" />
             <option value="$PROJECT_DIR$/feature/special" />
+            <option value="$PROJECT_DIR$/feature/splash" />
             <option value="$PROJECT_DIR$/feature/support" />
             <option value="$PROJECT_DIR$/shared" />
-            <option value="$PROJECT_DIR$/shared/fragmentDependencies" />
+            <option value="$PROJECT_DIR$/shared/fragmentdependencies" />
             <option value="$PROJECT_DIR$/shared/loans" />
-            <option value="$PROJECT_DIR$/shared/viewModelFactory" />
-            <option value="$PROJECT_DIR$/shared/viewPagerAdapter" />
+            <option value="$PROJECT_DIR$/shared/resourceprovider" />
+            <option value="$PROJECT_DIR$/shared/viewmodelfactory" />
+            <option value="$PROJECT_DIR$/shared/viewpageradapter" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>

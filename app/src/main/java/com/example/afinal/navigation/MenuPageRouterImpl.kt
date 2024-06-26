@@ -1,6 +1,8 @@
 package com.example.afinal.navigation
 
 import com.example.afinal.di.LocalRouter
+import com.example.afinal.feature.addresses.getAddressesScreen
+import com.example.afinal.feature.auth.getAuthScreen
 import com.example.afinal.feature.menupage.MenuPageRouter
 import com.example.afinal.feature.myloanspage.getMyLoans
 import com.example.afinal.feature.onboarding.getOnboardingScreen
@@ -22,4 +24,6 @@ class MenuPageRouterImpl @Inject constructor(
 
     override fun openOnboarding() = router.navigateTo(getOnboardingScreen())
     override fun openMyLoansPage() = localRouter.navigateTo(getMyLoans())
+    override fun openAddresses() = router.navigateTo(getAddressesScreen())
+    override fun openAuth() = router.newRootScreen(getAuthScreen())
 }

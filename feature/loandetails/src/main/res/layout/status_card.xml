@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp">
+
+    <include
+        android:id="@+id/statusCardThumbnail"
+        layout="@layout/status_card_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statusCardConstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/statusTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/status"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/status"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/statusTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="На рассмотрении" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

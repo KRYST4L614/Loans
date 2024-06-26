@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afinal.feature.homepage.R
 import com.example.afinal.feature.homepage.databinding.FragmentHomePageBinding
 import com.example.afinal.feature.homepage.di.DaggerHomePageComponent
+import com.example.afinal.feature.homepage.presentation.HomePageState.Content
+import com.example.afinal.feature.homepage.presentation.HomePageState.Error
+import com.example.afinal.feature.homepage.presentation.HomePageState.Loading
 import com.example.afinal.feature.homepage.presentation.HomePageViewModel
-import com.example.afinal.feature.homepage.presentation.UIState.Content
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import com.example.afinal.shared.loans.ui.adapter.LoanItemAdapter
 import com.example.afinal.util.toEditable
@@ -55,60 +57,38 @@ class HomePageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSlider()
+
+        setOnClickListeners()
         setupLoansList()
         setupMenu()
 
         viewModel.state.observe(viewLifecycleOwner) {
-            if (it is Content) {
-                observeContentState(it)
+            when (it) {
+                is Error -> observeErrorState(it)
+                is Content -> observeContentState(it)
+                is Loading -> observeLoadingState()
             }
         }
 
-        viewModel.getLoans()
-
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.getLoans()
-        }
-
-        binding.myLoansCard.button.setOnClickListener {
-            viewModel.openMyLoansPage()
-        }
+        viewModel.getLoansData()
     }
 
-    private fun setupSlider() {
+    private fun setOnClickListeners() {
         with(binding) {
-            sumSlider.progress = 5
-            sumSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                    if (fromUser) {
-                        sum.text =
-                            getString(ComponentR.string.sum).format(progress * 100).toEditable()
-                    }
-                    sumMessage.text =
-                        if (progress * 100 < 500) getString(R.string.l_bound_sum) else null
-                }
+            swipeRefresh.setOnRefreshListener {
+                viewModel.getLoansData()
+            }
 
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                    binding.swipeRefresh.isEnabled = false
-                }
+            myLoansCard.button.setOnClickListener {
+                viewModel.openMyLoansPage()
+            }
 
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    binding.swipeRefresh.isEnabled = true
-                }
+            sliderCard.button.setOnClickListener {
+                viewModel.openRequestLoan(sliderCard.sum.text?.toString()?.toInt() ?: 0)
+            }
 
-            })
-
-            sum.doOnTextChanged { text, _, _, _ ->
-                sumSlider.progress = text.toString().dropLast(2).toInt() / 100
-                sumMessage.text =
-                    if (text.toString().dropLast(2)
-                            .toInt() > 10000
-                    ) getString(R.string.u_bound_sum) else null
+            error.retryButton.setOnClickListener {
+                viewModel.getLoansData()
             }
         }
     }
@@ -130,17 +110,116 @@ class HomePageFragment : Fragment() {
         }
     }
 
+    private fun observeErrorState(errorState: Error) {
+        with(binding) {
+            isErrorShows(true)
+            error.errorMessage.text = errorState.errorMessage
+        }
+    }
+
     private fun observeContentState(content: Content) {
         with(binding) {
-            if (content.data.isEmpty()) {
+            if (content.loans.isEmpty()) {
                 myLoansBody.isVisible = true
                 myLoansCard.root.isVisible = false
             } else {
                 myLoansCard.root.isVisible = true
                 myLoansBody.isVisible = false
-                (myLoansCard.loans.adapter as LoanItemAdapter).updateData(content.data)
+                (myLoansCard.loans.adapter as LoanItemAdapter).updateData(content.loans.take(3))
             }
+
+            val conditions = content.conditions
+
+            sliderCard.rangeSumMax.text =
+                getString(ComponentR.string.sum).format(conditions.maxAmount)
+
+            setSumTextChangeListener(conditions.maxAmount)
+
+            setupSlider(conditions.maxAmount)
+
+            sliderCard.conditionBody.text = getString(R.string.conditions_body).format(
+                conditions.percent,
+                conditions.period
+            )
+
             swipeRefresh.isRefreshing = false
+            isShimmerStarted(false)
+
+            isErrorShows(false)
+        }
+    }
+
+    private fun observeLoadingState() {
+        isShimmerStarted(true)
+        isErrorShows(false)
+    }
+
+    private fun isErrorShows(shows: Boolean) {
+        with(binding) {
+            swipeRefresh.isRefreshing = false
+            error.root.isVisible = shows
+            scrollView.isVisible = !shows
+        }
+    }
+
+    private fun isShimmerStarted(started: Boolean) {
+        with(binding) {
+            if (started) {
+                sliderCardShimmer.showShimmer(true)
+                myLoansCardShimmer.showShimmer(true)
+            } else {
+                sliderCardShimmer.hideShimmer()
+                myLoansCardShimmer.hideShimmer()
+            }
+
+            sliderCard.sliderCardThumbnail.root.isVisible = started
+            sliderCard.sliderCardConsLayout.isVisible = !started
+
+            myLoansCard.myLoansCardThumbnail.root.isVisible = started
+            myLoansCard.myLoansCardLinLayout.isVisible = !started
+        }
+    }
+
+    private fun setSumTextChangeListener(maxAmount: Int) {
+        with(binding) {
+            sliderCard.sum.doOnTextChanged { text, _, _, _ ->
+                if (!text.isNullOrEmpty()) {
+                    val sum = text.toString().toInt()
+                    sliderCard.sumSlider.progress = if (sum > 0) sum / (maxAmount / 100) else 0
+                    sliderCard.sumMessage.text =
+                        if (sum > maxAmount
+                        ) getString(R.string.u_bound_sum).format(maxAmount) else null
+                }
+            }
+        }
+    }
+
+    private fun setupSlider(maxAmount: Int) {
+        with(binding) {
+            sliderCard.sumSlider.setOnSeekBarChangeListener(object :
+                SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    val amount = (maxAmount * progress / 100.0).toInt()
+                    if (fromUser) {
+                        sliderCard.sum.text = amount.toString().toEditable()
+                    }
+                    sliderCard.sumMessage.text =
+                        if (amount < 500) getString(R.string.l_bound_sum) else null
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    binding.swipeRefresh.isEnabled = false
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    binding.swipeRefresh.isEnabled = true
+                }
+
+            })
         }
     }
 

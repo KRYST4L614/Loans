@@ -14,8 +14,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -45,10 +43,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.core.splashscreen)
@@ -72,10 +66,15 @@ dependencies {
     implementation(project(":feature:loandetails"))
     implementation(project(":feature:language"))
     implementation(project(":feature:special"))
+    implementation(project(":feature:splash"))
     implementation(project(":feature:support"))
     implementation(project(":feature:addresses"))
+    implementation(project(":feature:requestloan"))
+    implementation(project(":feature:rejectloan"))
+    implementation(project(":feature:acceptloan"))
     implementation(project(":component:resources"))
-    implementation(project(":shared:fragmentDependencies"))
-    implementation(project(":shared:viewModelFactory"))
+    implementation(project(":shared:fragmentdependencies"))
+    implementation(project(":shared:viewmodelfactory"))
     implementation(project(":shared:loans"))
+    implementation(project(":shared:resourceprovider"))
 }

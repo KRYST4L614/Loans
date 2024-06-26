@@ -2,12 +2,12 @@ package com.example.afinal
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.afinal.databinding.ActivityMainBinding
-import com.example.afinal.feature.auth.getAuthScreen
-import com.example.afinal.feature.home.getHomeScreen
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.example.afinal.feature.splash.getSplashScreen as getSplash
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +23,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as App).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(binding.root)
+
         if (savedInstanceState == null) {
-            router.newRootScreen(getHomeScreen())
+            router.newRootChain(getSplash())
         }
     }
 

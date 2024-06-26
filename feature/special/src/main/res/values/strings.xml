@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="special_title">Специальное предложение</string>
+    <string name="special_body">Погасите займ досрочно и мы увеличим лимит для следующего займа</string>
+    <string name="addresses_button">Ближайшее отделение банка</string>
+</resources>

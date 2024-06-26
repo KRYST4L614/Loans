@@ -8,11 +8,8 @@ import com.example.afinal.shared.loans.domain.entities.Loan
 import com.example.afinal.shared.loans.domain.entities.Status.APPROVED
 import com.example.afinal.shared.loans.domain.entities.Status.REGISTERED
 import com.example.afinal.shared.loans.domain.entities.Status.REJECTED
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
+import com.example.afinal.util.toSum
 import java.text.SimpleDateFormat
-import java.util.Locale
 import com.example.afinal.component.resources.R as ComponentR
 
 
@@ -24,14 +21,8 @@ class LoanViewHolder(
     @SuppressLint("SimpleDateFormat")
     fun bind(loan: Loan) {
         with(binding) {
-            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-            val symbols: DecimalFormatSymbols = formatter.decimalFormatSymbols
-
-            symbols.setGroupingSeparator(' ')
-            formatter.decimalFormatSymbols = symbols
-
             sum.text =
-                root.context.getString(ComponentR.string.sum).format(formatter.format(loan.amount))
+                root.context.getString(ComponentR.string.sum).format(loan.amount.toSum())
             loanId.text = root.context.getString(R.string.loan_id).format(loan.id)
             date.text = SimpleDateFormat("d MMMM, EEE").format(loan.date)
             status.text = when (loan.state) {
@@ -46,7 +37,7 @@ class LoanViewHolder(
                 }
 
                 REJECTED -> {
-                    status.setTextColor(root.context.getColor(ComponentR.color.onSecondary))
+                    status.setTextColor(root.context.getColor(ComponentR.color.fontSecondaryDay))
                     root.context.getString(R.string.loan_rejected)
                 }
             }

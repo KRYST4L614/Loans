@@ -10,8 +10,6 @@ android {
 
     defaultConfig {
         minSdk = 28
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -47,6 +45,6 @@ dependencies {
     ksp(libs.com.google.dagger.compiler)
 
     implementation(project(":component:resources"))
-    implementation(project(":shared:fragmentDependencies"))
-    implementation(project(":shared:viewModelFactory"))
+    implementation(project(":shared:fragmentdependencies"))
+    implementation(project(":shared:viewmodelfactory"))
 }

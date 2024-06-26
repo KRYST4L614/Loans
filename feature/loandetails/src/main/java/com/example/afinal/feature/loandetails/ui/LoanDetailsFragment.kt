@@ -6,22 +6,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.afinal.feature.loandetails.R
 import com.example.afinal.feature.loandetails.databinding.FragmentLoanDetailsBinding
 import com.example.afinal.feature.loandetails.di.DaggerLoanDetailsComponent
-import com.example.afinal.feature.loandetails.presentation.LoanDetailsState
+import com.example.afinal.feature.loandetails.presentation.LoanDetailsState.Content
+import com.example.afinal.feature.loandetails.presentation.LoanDetailsState.Error
+import com.example.afinal.feature.loandetails.presentation.LoanDetailsState.Loading
 import com.example.afinal.feature.loandetails.presentation.LoanDetailsViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import com.example.afinal.shared.loans.domain.entities.Loan
 import com.example.afinal.shared.loans.domain.entities.Status
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
+import com.example.afinal.util.toSum
 import java.text.SimpleDateFormat
-import java.util.Locale
 import javax.inject.Inject
 import com.example.afinal.component.resources.R as ComponentR
 import com.example.afinal.shared.loans.R as LoansR
@@ -65,73 +66,148 @@ class LoanDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val loan: Loan? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(LOAN_KEY, Loan::class.java)
+            requireArguments().getParcelable(LOAN_KEY, Loan::class.java)
         } else {
             @Suppress("DEPRECATION")
-            arguments?.getParcelable(LOAN_KEY)
-        }
-        loan?.let {
-            setupLoanView(it)
+            requireArguments().getParcelable(LOAN_KEY)
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
-            loan?.let {
-                viewModel.getLoanDetails(it.id)
-            }
+        loan?.let {
+            setupLoanView(it)
+            setOnClickListeners(it)
+            isShimmerStarted(false)
         }
 
         viewModel.state.observe(viewLifecycleOwner) {
-            if (it is LoanDetailsState.Content) {
-                setupLoanView(it.data)
-                binding.swipeRefresh.isRefreshing = false
+            when (it) {
+                is Content -> observeContentState(it)
+                is Loading -> observeLoadingState()
+                is Error -> observeErrorState(it)
             }
         }
 
-        binding.toolbar.setNavigationOnClickListener {
+        requireActivity().onBackPressedDispatcher.addCallback {
             viewModel.close()
+            this.remove()
         }
+    }
+
+    private fun observeContentState(content: Content) {
+        setupLoanView(content.data)
+        binding.swipeRefresh.isRefreshing = false
+        isShimmerStarted(false)
+        isErrorShows(false)
     }
 
     private fun setupLoanView(loan: Loan) {
         with(binding) {
+            setupUserInfoCard(loan)
+            setupLoanDetailsCard(loan)
+            setupStatusCard(loan)
+            binding.toolbar.title = root.context.getString(LoansR.string.loan_id).format(loan.id)
+        }
+    }
+
+    private fun setupUserInfoCard(loan: Loan) {
+        with(binding.userInfoCard) {
             name.text = loan.firstName
             secondName.text = loan.lastName
             phone.text = loan.phoneNumber
-            loanId.text = root.context.getString(LoansR.string.loan_id).format(loan.id)
+        }
+    }
+
+    private fun setupLoanDetailsCard(loan: Loan) {
+        with(binding.loanDetailsCard) {
+            loanId.text = getString(LoansR.string.loan_id).format(loan.id)
             date.text = SimpleDateFormat(
                 "d MMMM, EEE",
                 resources.configuration.locales[0]
             ).format(loan.date)
             percent.text = getString(R.string.percent).format(loan.percent)
             period.text = loan.period.toString()
-
-            val formatter = NumberFormat.getInstance(Locale.US) as DecimalFormat
-            val symbols: DecimalFormatSymbols = formatter.decimalFormatSymbols
-
-            symbols.setGroupingSeparator(' ')
-            formatter.decimalFormatSymbols = symbols
-
-            sum.text = getString(com.example.afinal.component.resources.R.string.sum).format(
-                formatter.format(loan.amount)
+            sum.text = getString(ComponentR.string.sum).format(
+                loan.amount.toSum()
             )
-            statusId.text = when (loan.state) {
+        }
+    }
+
+    private fun setupStatusCard(loan: Loan) {
+        with(binding.statusCard) {
+            status.text = when (loan.state) {
                 Status.APPROVED -> {
-                    statusId.setTextColor(requireContext().getColor(LoansR.color.indicator_positive))
+                    status.setTextColor(requireContext().getColor(LoansR.color.indicator_positive))
                     root.context.getString(LoansR.string.loan_approved)
                 }
 
                 Status.REGISTERED -> {
-                    statusId.setTextColor(requireContext().getColor(LoansR.color.indicator_attention))
+                    status.setTextColor(requireContext().getColor(LoansR.color.indicator_attention))
                     root.context.getString(LoansR.string.loan_registered)
                 }
 
                 Status.REJECTED -> {
-                    statusId.setTextColor(requireContext().getColor(ComponentR.color.onSecondary))
+                    status.setTextColor(requireContext().getColor(ComponentR.color.fontSecondaryDay))
                     root.context.getString(LoansR.string.loan_rejected)
                 }
             }
-            binding.toolbar.title = root.context.getString(LoansR.string.loan_id).format(loan.id)
+        }
+    }
+
+    private fun observeLoadingState() {
+        isShimmerStarted(true)
+        isErrorShows(false)
+    }
+
+    private fun observeErrorState(error: Error) {
+        binding.error.errorMessage.text = error.errorMessage
+        isShimmerStarted(false)
+        isErrorShows(true)
+    }
+
+    private fun isShimmerStarted(started: Boolean) {
+        with(binding) {
+            if (started) {
+                userInfoCardShimmer.showShimmer(true)
+                loanDetailsCardShimmer.showShimmer(true)
+                statusCardShimmer.showShimmer(true)
+            } else {
+                userInfoCardShimmer.hideShimmer()
+                loanDetailsCardShimmer.hideShimmer()
+                statusCardShimmer.hideShimmer()
+            }
+            userInfoCard.userInfoCardThumbnail.root.isVisible = started
+            userInfoCard.userInfoConstLayout.isVisible = !started
+
+            loanDetailsCard.loanDetailsCardThumbnail.root.isVisible = started
+            loanDetailsCard.loanDetailsConstLayout.isVisible = !started
+
+            statusCard.statusCardThumbnail.root.isVisible = started
+            statusCard.statusCardConstLayout.isVisible = !started
+        }
+    }
+
+    private fun setOnClickListeners(loan: Loan) {
+        with(binding) {
+            toolbar.setNavigationOnClickListener {
+                viewModel.close()
+            }
+
+            error.retryButton.setOnClickListener {
+                viewModel.getLoanDetails(loan.id)
+            }
+
+            binding.swipeRefresh.setOnRefreshListener {
+                viewModel.getLoanDetails(loan.id)
+            }
+        }
+    }
+
+    private fun isErrorShows(shows: Boolean) {
+        with(binding) {
+            swipeRefresh.isRefreshing = false
+            error.root.isVisible = shows
+            swipeRefresh.isVisible = !shows
         }
     }
 

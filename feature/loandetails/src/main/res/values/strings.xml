@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="percent">%1$.2f %%</string>
+    <string name="date">Дата оформления</string>
+    <string name="loan_id_title">Номер займа</string>
+    <string name="period">Период (дней)</string>
+    <string name="percent_title">Процент</string>
+    <string name="sum_title">Сумма</string>
+    <string name="status">Статус</string>
+    <string name="info">Когда займ примет статус «Одобрен», Вам нужно будет подойти с паспортом в отделение банка для подписания договора и получить деньги</string>
 </resources>

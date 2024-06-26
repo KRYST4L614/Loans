@@ -1,8 +1,8 @@
 package com.example.afinal.feature.auth.data
 
-import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.auth.domain.entities.LoggedUser
 import com.example.afinal.feature.auth.domain.entities.LoginUser
+import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.util.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

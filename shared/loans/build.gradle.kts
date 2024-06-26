@@ -11,8 +11,6 @@ android {
 
     defaultConfig {
         minSdk = 28
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -41,16 +39,14 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    testImplementation(libs.junit)
     implementation(libs.material)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.com.google.dagger)
     ksp(libs.com.google.dagger.compiler)
     implementation(libs.com.squareup.retrofit2)
+    implementation(libs.androidx.security.crypto)
 
     implementation(project(":component:resources"))
-    implementation(project(":shared:fragmentDependencies"))
+    implementation(project(":shared:fragmentdependencies"))
     implementation(project(":util"))
 }

@@ -2,7 +2,7 @@ package com.example.afinal.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.afinal.MainViewModel
+import com.example.afinal.feature.acceptloan.presentation.AcceptLoanViewModel
 import com.example.afinal.feature.addresses.presentation.AddressesViewModel
 import com.example.afinal.feature.auth.presentation.AuthViewModel
 import com.example.afinal.feature.home.presentation.HomeViewModel
@@ -11,7 +11,10 @@ import com.example.afinal.feature.loandetails.presentation.LoanDetailsViewModel
 import com.example.afinal.feature.menupage.presentation.MenuPageViewModel
 import com.example.afinal.feature.myloanspage.presentation.MyLoansPageViewModel
 import com.example.afinal.feature.onboarding.presentation.OnboardingViewModel
+import com.example.afinal.feature.rejectloan.presentation.RejectLoanViewModel
+import com.example.afinal.feature.requestloan.presentation.RequestLoanViewModel
 import com.example.afinal.feature.special.presentation.SpecialViewModel
+import com.example.afinal.feature.splash.presentation.SplashViewModel
 import com.example.afinal.feature.support.presentation.SupportViewModel
 import com.exapmle.afinal.feature.language.presentation.LanguageViewModel
 import com.exapmle.shared.viewModelFactory.ViewModelFactory
@@ -21,11 +24,6 @@ import dagger.multibindings.IntoMap
 
 @Module
 interface PresentationModule {
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -81,6 +79,26 @@ interface PresentationModule {
     @IntoMap
     @ViewModelKey(LoanDetailsViewModel::class)
     fun bindLoanDetailsViewModel(viewModel: LoanDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RequestLoanViewModel::class)
+    fun bindRequestLoanViewModel(viewModel: RequestLoanViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RejectLoanViewModel::class)
+    fun bindRejectLoanViewModel(viewModel: RejectLoanViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AcceptLoanViewModel::class)
+    fun bindAcceptLoanViewModel(viewModel: AcceptLoanViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
 
     @Binds
     fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

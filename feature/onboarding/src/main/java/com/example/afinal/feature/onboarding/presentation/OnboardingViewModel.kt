@@ -7,5 +7,5 @@ import javax.inject.Inject
 class OnboardingViewModel @Inject constructor(
     private val router: OnboardingRouter
 ) : ViewModel() {
-    fun openHomePage() = router.openHome()
+    fun openHome() = router.openHome()
 }

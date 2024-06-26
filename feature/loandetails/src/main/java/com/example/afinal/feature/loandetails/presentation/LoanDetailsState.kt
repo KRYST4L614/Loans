@@ -8,4 +8,8 @@ sealed interface LoanDetailsState {
     ) : LoanDetailsState
 
     data object Loading : LoanDetailsState
+
+    data class Error(
+        val errorMessage: String
+    ) : LoanDetailsState
 }

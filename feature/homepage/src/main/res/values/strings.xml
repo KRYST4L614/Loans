@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="u_bound_sum">Максимум 10 000 ₽</string>
+    <string name="u_bound_sum">Максимум %1$s ₽</string>
     <string name="l_bound_sum">Минимум 500 ₽</string>
+    <string name="banner_title">Получите займ в 2 клика</string>
+    <string name="banner_body">Деньги наличными на любые цели</string>
+    <string name="sum_title">Сумма займа</string>
+    <string name="amount">500</string>
+    <string name="sum_range_min">0 ₽</string>
+    <string name="conditions_title">Условия</string>
+    <string name="conditions_body">Под %1$.2f %% на %2$d дней</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="my_loans_title">Мои займы</string>
+    <string name="my_loans_body">Здесь будут отображаться Ваши активные займы</string>
+    <string name="see_all_loans_button">Посмотреть все</string>
 </resources>

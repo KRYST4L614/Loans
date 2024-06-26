@@ -8,4 +8,5 @@ class SpecialViewModel @Inject constructor(
     private val router: SpecialRouter
 ) : ViewModel() {
     fun close() = router.close()
+    fun openAddresses() = router.openAddresses()
 }

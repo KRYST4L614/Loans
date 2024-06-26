@@ -6,4 +6,6 @@ interface MenuPageRouter {
     fun openSpecial()
     fun openOnboarding()
     fun openMyLoansPage()
+    fun openAddresses()
+    fun openAuth()
 }

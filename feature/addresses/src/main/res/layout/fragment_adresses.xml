@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/onboarding_menu"
+        app:menu="@menu/menu_with_back_nav"
         app:navigationIcon="@drawable/close_icon" />
 
     <ImageView
@@ -27,30 +27,27 @@
 
     <TextView
         android:id="@+id/message"
+        style="@style/TextLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="28dp"
         android:gravity="center"
-        android:lineHeight="26sp"
-        android:text="Сервис временно недоступен"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="500"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/button"
+        android:text="@string/service_not_available"
+        app:layout_constraintBottom_toTopOf="@id/goToHomeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sorryImage" />
 
     <Button
-        android:id="@+id/button"
-        style="@style/btn_style"
+        android:id="@+id/goToHomeButton"
+        style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:paddingHorizontal="14dp"
         android:paddingVertical="13dp"
-        android:text="Войти"
+        android:text="@string/go_to_home_button"
         android:textAllCaps="false"
         android:textColor="?attr/colorOnPrimary"
         app:cornerRadius="8dp"

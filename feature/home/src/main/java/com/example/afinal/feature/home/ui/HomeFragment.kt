@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.afinal.shared.fragmentDependencies.LocalNavigationHolder
 import com.example.afinal.feature.home.R
 import com.example.afinal.feature.home.databinding.FragmentHomeBinding
 import com.example.afinal.feature.home.di.DaggerHomeComponent
 import com.example.afinal.feature.home.presentation.HomeState
 import com.example.afinal.feature.home.presentation.HomeViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
+import com.example.afinal.shared.fragmentDependencies.LocalNavigationHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
         setupTabLayout()
-        viewModel.handleTabChange()
         return binding.root
     }
 

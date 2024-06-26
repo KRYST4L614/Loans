@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.afinal.feature.onboarding.R
 import com.example.afinal.feature.onboarding.databinding.FragmentOnboardingBinding
 import com.example.afinal.feature.onboarding.di.DaggerOnboardingComponent
 import com.example.afinal.feature.onboarding.presentation.OnboardingViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
-import com.example.afinal.shared.viewPagerAdapter.ViewPagerAdapter
+import com.example.afinal.shared.viewpageradapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
@@ -35,7 +37,7 @@ class OnboardingFragment : Fragment() {
     private val onBackPressedCallback: OnBackPressedCallback =
         object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                viewModel.openHomePage()
+                viewModel.openHome()
             }
         }
 
@@ -62,7 +64,7 @@ class OnboardingFragment : Fragment() {
         setMenuVisibility(true)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
-            viewModel.openHomePage()
+            viewModel.openHome()
         }
         binding.viewPager.adapter = ViewPagerAdapter(
             childFragmentManager,
@@ -83,7 +85,7 @@ class OnboardingFragment : Fragment() {
 
             nextButton.setOnClickListener {
                 if (viewPager.currentItem == 2) {
-                    viewModel.openHomePage()
+                    viewModel.openHome()
                 }
                 viewPager.currentItem = (viewPager.currentItem + 1).coerceAtMost(2)
             }
@@ -92,24 +94,13 @@ class OnboardingFragment : Fragment() {
         binding.tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> binding.backButton.visibility = View.INVISIBLE
-                    2 -> binding.nextButton.text = "Закрыть"
-                    else -> {
-                        binding.backButton.visibility = View.VISIBLE
-                        binding.nextButton.text = "Далее"
-                    }
-                }
-                when (tab?.position) {
-                    0 -> {
-                        binding.backButton.visibility = View.INVISIBLE
-                    }
+                    0 -> binding.backButton.isVisible = false
 
-                    2 -> {
-                        binding.nextButton.text = "Закрыть"
-                    }
+                    2 -> binding.nextButton.text = getString(R.string.close_button)
 
                     else -> {
-                        binding.backButton.visibility = View.VISIBLE
+                        binding.backButton.isVisible = true
+                        binding.nextButton.text = getString(R.string.next_button)
                     }
                 }
             }

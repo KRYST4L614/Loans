@@ -13,12 +13,13 @@
         android:layout_gravity="top"
         android:background="?attr/backgroundColor"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/onboarding_menu"
+        app:menu="@menu/menu_with_back_nav"
         app:navigationIcon="@drawable/ic_arrow_left"
-        app:title="Язык" />
+        app:title="@string/language"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listView"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

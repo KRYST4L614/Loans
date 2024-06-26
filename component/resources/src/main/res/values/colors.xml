@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="fontPrimaryDay">#FF3E3E3E</color>
+    <color name="fontSecondaryDay">#FF73787F</color>
+    <color name="fontDisableDay">#FFA1A5AA</color>
+    <color name="fontPrimaryDayInvert">#FFFFFF</color>
+
     <color name="primary">#FFFED200</color>
-    <color name="onPrimary">#FF3E3E3E</color>
-    <color name="onSecondary">#FF73787F</color>
-    <color name="onSurface">#FFA1A5AA</color>
-    <color name="onPrimaryInverse">#FFFFFF</color>
     <color name="primaryLight">#FFFFE982</color>
     <color name="primaryDark">#FFF1CB16</color>
-    <color name="backGroundPrimary">#FFFFFFFF</color>
-    <color name="backGroundSecondary">#FFF1F1F2</color>
-    <color name="backGroundTertiary">#FF9D9E9F</color>
-    <color name="backGroundDisable">#FFE5E5E5</color>
-    <color name="backGroundInvert">#FF272F3A</color>
 
-    <color name="fontDarkPrimaryInverse">#FF151E2A</color>
+    <color name="backGroundDayPrimary">#FFFFFFFF</color>
+    <color name="backGroundDaySecondary">#FFF1F1F2</color>
+    <color name="backGroundDayTertiary">#FF151E2A</color>
+    <color name="backGroundDayDisable">#FFE5E5E5</color>
+    <color name="backGroundDayInvert">#FF272F3A</color>
+
+    <color name="indicatorDayError">#FFE53E3E</color>
+
+    <color name="borderPrimaryDay">#FF959698</color>
+    <color name="borderSecondaryDay">#FFE3E4E5</color>
+
+    <color name="backGroundNightPrimary">#FF151E2A</color>
+    <color name="backGroundNightSecondary">#FF313944</color>
+    <color name="backGroundNightTertiary">#FF363A42</color>
+    <color name="backGroundNightDisable">#FF2D3137</color>
+    <color name="backGroundNightInvert">#FFF5F5F5</color>
+
+    <color name="fontPrimaryNightInverse">#FFFFFFFF</color>
+    <color name="fontSecondaryNight">#FFA1A5AA</color>
+    <color name="fontDisableNight">#FF73787F</color>
+    <color name="fontPrimaryNightInvert">#FF151E2A</color>
 </resources>

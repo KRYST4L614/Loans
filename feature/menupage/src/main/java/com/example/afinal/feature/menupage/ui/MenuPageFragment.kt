@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +14,11 @@ import com.example.afinal.feature.menupage.R
 import com.example.afinal.feature.menupage.databinding.FragmentMenuPageBinding
 import com.example.afinal.feature.menupage.di.DaggerMenuPageComponent
 import com.example.afinal.feature.menupage.presentation.MenuPageViewModel
-import com.example.afinal.feature.menupage.presentation.adapter.MenuItemAdapter
+import com.example.afinal.feature.menupage.ui.adapter.MenuItemAdapter
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import javax.inject.Inject
+import com.example.afinal.component.resources.R as ComponentR
+
 
 class MenuPageFragment : Fragment() {
     companion object {
@@ -49,23 +52,48 @@ class MenuPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.listView.adapter =
-            MenuItemAdapter(resources.getStringArray(R.array.menu_items).toList()) {
-                when (it) {
-                    "Мои займы" -> viewModel.openMyLoansPage()
-                    "Помощь" -> viewModel.openSupport()
-                    "Предложения для вас" -> viewModel.openSpecial()
-                    "Язык" -> viewModel.openLanguage()
-                    "Отделения банка" -> {}
+        setupMenu()
+
+        with(binding) {
+            listView.adapter =
+                MenuItemAdapter(resources.getStringArray(R.array.menu_items).toList()) {
+                    if (it != getString(R.string.exit)) {
+                        viewModel.handleClickMenuItem(it)
+                    } else {
+                        openExitDialog()
+                    }
                 }
+
+            listView.layoutManager = object : LinearLayoutManager(requireContext()) {
+                override fun canScrollVertically() = false
             }
-        binding.listView.layoutManager = object : LinearLayoutManager(requireContext()) {
-            override fun canScrollVertically() = false
         }
     }
 
+    private fun openExitDialog() {
+        val alertDialog: AlertDialog = AlertDialog.Builder(requireContext()).create()
+
+        alertDialog.setTitle(getString(R.string.exit_dialog_title))
+
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE,
+            getString(R.string.cancel)
+        ) { dialog, _ -> dialog.dismiss() }
+
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.exit)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            viewModel.openAuth()
+        }
+
+        alertDialog.show()
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).isAllCaps = false
+    }
+
     private fun setupMenu() {
-        binding.toolbar.menu.findItem(com.example.afinal.component.resources.R.id.info).setOnMenuItemClickListener {
+        binding.toolbar.menu.findItem(ComponentR.id.info).setOnMenuItemClickListener {
             viewModel.openOnboarding()
             true
         }

@@ -1,24 +1,23 @@
 package com.example.afinal.feature.auth.ui
 
-import android.content.Context
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import com.example.afinal.feature.auth.R
 import com.example.afinal.feature.auth.databinding.AuthBottomSheetBinding
-import com.example.afinal.feature.auth.di.DaggerAuthComponent
 import com.example.afinal.feature.auth.presentation.AuthState
+import com.example.afinal.feature.auth.presentation.AuthState.Content
 import com.example.afinal.feature.auth.presentation.AuthViewModel
-import com.example.afinal.feature.auth.util.PasswordTransformation
-import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
-import javax.inject.Inject
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class AuthBottomSheet : BottomSheetDialogFragment() {
 
@@ -28,7 +27,6 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: AuthBottomSheetBinding? = null
     private val binding get() = _binding!!
-
 
     private val viewModel by viewModels<AuthViewModel>(ownerProducer = { requireParentFragment() })
 
@@ -49,18 +47,96 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
+        setTextChangeListeners()
+        setupTabLayout()
+
+        observeViewModelState()
+
+    }
+
+    private fun setTextChangeListeners() {
         with(binding) {
-            passwordEditText.transformationMethod = PasswordTransformation()
+            passwordEditText.transformationMethod = PasswordTransformationMethod()
+
+            loginEditText.doAfterTextChanged {
+                viewModel.checkName(it?.toString() ?: "")
+            }
+
+            passwordEditText.doAfterTextChanged {
+                viewModel.checkPasswords(
+                    passwordEditText.text?.toString() ?: "",
+                    repeatPasswordEditText.text?.toString() ?: ""
+                )
+            }
+
+            repeatPasswordEditText.doAfterTextChanged {
+                viewModel.checkPasswords(
+                    passwordEditText.text?.toString() ?: "",
+                    repeatPasswordEditText.text?.toString() ?: ""
+                )
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
+        with(binding) {
+            button.setOnClickListener {
+                viewModel.handleButtonClick(
+                    loginEditText.text?.toString() ?: "",
+                    passwordEditText.text?.toString() ?: "",
+                    repeatPasswordEditText.text?.toString() ?: ""
+
+                )
+            }
+
+            passwordInputLayout.setEndIconOnClickListener {
+                iconEndClickListener(passwordInputLayout, passwordEditText)
+            }
+
+
+            repeatPasswordInputLayout.setEndIconOnClickListener {
+                iconEndClickListener(repeatPasswordInputLayout, repeatPasswordEditText)
+            }
+        }
+    }
+
+    private fun iconEndClickListener(inputLayout: TextInputLayout, editText: TextInputEditText) {
+        if (editText.transformationMethod == null) {
+            inputLayout.endIconDrawable = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.eye_off,
+                requireContext().theme
+            )
+            editText.transformationMethod = PasswordTransformationMethod()
+        } else {
+            inputLayout.endIconDrawable = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.eye_on,
+                requireContext().theme
+            )
+            editText.transformationMethod = null
+        }
+        editText.setSelection(editText.text?.length ?: 0)
+    }
+
+    private fun setupTabLayout() {
+        with(binding) {
+
             tableLayout.addOnTabSelectedListener(
+
                 object : TabLayout.OnTabSelectedListener {
+
                     override fun onTabSelected(tab: TabLayout.Tab) {
+
                         if (tab.position == 0) {
-                            binding.repeatPasswordInputLayout.isVisible = false
-                            binding.button.text = "Войти"
+                            repeatPasswordInputLayout.isVisible = false
+                            button.text = getString(R.string.enter)
                         } else {
-                            binding.repeatPasswordInputLayout.isVisible = true
-                            binding.button.text = "Зарегистрироваться"
+                            repeatPasswordInputLayout.isVisible = true
+                            button.text = getString(R.string.register)
                         }
+
                         viewModel.handleTabChange(position = tab.position)
                     }
 
@@ -68,44 +144,32 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
                     override fun onTabReselected(tab: TabLayout.Tab) {}
                 }
             )
-
-            button.setOnClickListener {
-                viewModel.handleButtonClick(
-                    binding.loginEditText.text,
-                    binding.passwordEditText.text
-                )
-            }
-
-            loginEditText.doAfterTextChanged {
-                viewModel.checkName(it)
-            }
-
-            passwordEditText.doAfterTextChanged {
-                viewModel.checkPasswords(passwordEditText.text, repeatPasswordEditText.text)
-            }
-
-            repeatPasswordEditText.doAfterTextChanged {
-                viewModel.checkPasswords(passwordEditText.text, repeatPasswordEditText.text)
-            }
         }
+    }
 
+    private fun observeViewModelState() {
         viewModel.state.observe(viewLifecycleOwner) {
-            if (it is AuthState.Success) {
-                dismiss()
-            } else if (it is AuthState.Content) {
-                binding.loginInputLayout.error = it.nameErrorMessage
-                binding.loginInputLayout.errorIconDrawable = null
-                binding.passwordInputLayout.error = it.passwordErrorMessage
-                binding.passwordInputLayout.errorIconDrawable = null
-                binding.repeatPasswordInputLayout.error = it.repeatedPasswordErrorMessage
-                binding.repeatPasswordInputLayout.errorIconDrawable = null
+            when (it) {
+                is Content -> observeContentState(it)
+
+                is AuthState.Loading -> dismiss()
+
+                else -> {}
             }
         }
     }
 
+    private fun observeContentState(content: Content) {
+        with(binding) {
+            loginInputLayout.error = content.nameErrorMessage
+            passwordInputLayout.error = content.passwordErrorMessage
+            repeatPasswordInputLayout.error = content.repeatedPasswordErrorMessage
+        }
+    }
+
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 
 }

@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">14.sp</item>
     </style>
 
-    <style name="btn_style" parent="Widget.MaterialComponents.Button">
+    <style name="Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="errorIconDrawable">@null</item>
+        <item name="cursorColor">@color/fontPrimaryDay</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="hintTextColor">@color/borderPrimaryDay</item>
+        <item name="boxStrokeColor">@color/borderPrimaryDay</item>
+        <item name="errorTextColor">@color/indicatorDayError</item>
+    </style>
+
+    <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">14sp</item>
+        <item name="backgroundTint">?attr/colorSecondary</item>
+    </style>
+
+    <style name="TextLarge">
+        <item name="android:lineHeight">26sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextMedium">
+        <item name="android:lineHeight">20sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextSmall">
+        <item name="android:lineHeight">18sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 </resources>

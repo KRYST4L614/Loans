@@ -1,22 +1,30 @@
 package com.example.afinal.feature.auth.presentation
 
-import android.text.Editable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.afinal.feature.auth.AuthRouter
+import com.example.afinal.feature.auth.R
 import com.example.afinal.feature.auth.domain.entities.LoginUser
 import com.example.afinal.feature.auth.domain.usecases.LoginUseCase
 import com.example.afinal.feature.auth.domain.usecases.RegistrationUseCase
+import com.example.afinal.feature.auth.domain.usecases.SaveTokenUseCase
+import com.example.afinal.feature.auth.presentation.AuthState.Content
+import com.example.afinal.feature.auth.presentation.AuthState.Loading
+import com.example.afinal.shared.resourceprovider.ResourceProvider
 import com.example.afinal.util.NetworkResponse
+import com.example.afinal.util.NetworkResponse.Error
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 import javax.inject.Inject
+import com.example.afinal.component.resources.R as ComponentR
 
 class AuthViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val registrationUseCase: RegistrationUseCase,
+    private val saveTokenUseCase: SaveTokenUseCase,
+    private val resourceProvider: ResourceProvider,
     private val router: AuthRouter
 ) : ViewModel() {
 
@@ -25,107 +33,142 @@ class AuthViewModel @Inject constructor(
 
     private var isLogin = true
 
-    fun handleButtonClick(name: Editable?, password: Editable?) {
+    private var lastContent: Content = Content()
+
+    init {
+        saveTokenUseCase(null)
+    }
+
+    fun handleButtonClick(name: String, password: String, repeatedPassword: String) {
         if (isLogin) {
             login(name, password)
         } else {
-            registration(name, password)
+            registration(name, password, repeatedPassword)
         }
     }
 
-    private fun login(name: Editable?, password: Editable?) = viewModelScope.launch {
+    private fun login(name: String, password: String) = viewModelScope.launch {
         checkPassword(password)
         checkName(name)
-        if ((_state.value as AuthState.Content) == AuthState.Content(isLogin) && name != null && password != null) {
-            _state.value = AuthState.Loading
-            val response = loginUseCase(LoginUser(name.toString(), password.toString()))
+
+        if (lastContent == Content()) {
+            _state.value = Loading
+
+            val response = loginUseCase(LoginUser(name, password))
+
             if (response is NetworkResponse.Success) {
-                _state.value = AuthState.Success
-                router.openOnboarding()
+                saveTokenUseCase(response.content)
+
+                if (isLogin) {
+                    router.openHome()
+                } else {
+                    router.openOnboarding()
+                }
+
             } else {
-                _state.value =
-                    AuthState.Content(isLogin)
+                _state.value = AuthState.Error(checkErrorResponse(response as Error))
+                saveTokenUseCase(null)
             }
         }
     }
 
-    private fun registration(name: Editable?, password: Editable?) = viewModelScope.launch {
-        checkPassword(password)
-        checkName(name)
-        val a = _state.value as AuthState.Content
-        Log.d("assasd", a.toString())
-        Log.d("assads", AuthState.Content(isLogin).toString())
-        if ((_state.value as AuthState.Content) == AuthState.Content(isLogin) && name != null && password != null) {
-            _state.value = AuthState.Loading
-            val response = registrationUseCase(LoginUser(name.toString(), password.toString()))
-            if (response is NetworkResponse.Success) {
-                login(name, password)
-            } else {
-                _state.value = AuthState.Error(
-                    (response as NetworkResponse.Error).e.localizedMessage ?: "",
-                )
+    private fun registration(name: String, password: String, repeatedPassword: String) =
+        viewModelScope.launch {
+            checkPasswords(password, repeatedPassword)
+            checkName(name)
+
+            if (lastContent == Content()) {
+                _state.value = Loading
+
+                val response = registrationUseCase(LoginUser(name, password))
+
+                if (response is NetworkResponse.Success) {
+                    login(name, password)
+                } else {
+                    _state.value = AuthState.Error(checkErrorResponse(response as Error))
+                }
+            }
+        }
+
+    private fun checkErrorResponse(errorResponse: Error): String {
+        with(resourceProvider) {
+            return when (errorResponse.code) {
+                400 -> getString(R.string.user_already_exists)
+
+                401 -> getString(ComponentR.string.unauthorized_error)
+
+                403 -> getString(ComponentR.string.forbidden_error)
+
+                404 -> getString(R.string.user_not_found)
+
+                null -> {
+                    when (errorResponse.e) {
+                        is IllegalStateException ->
+                            getString(ComponentR.string.invalid_response_error)
+
+                        is UnknownHostException ->
+                            getString(ComponentR.string.invalid_response_error)
+
+                        else -> getString(ComponentR.string.timeout_error)
+                    }
+                }
+
+                else -> getString(ComponentR.string.common_error)
             }
         }
     }
 
-    fun checkName(name: Editable?) {
-        val nameString = (name ?: "")
+    fun checkName(name: String) {
         val nameErrorMessage =
-            if (nameString.trim().isBlank()) {
-                "Имя не может быть пустым"
-            } else if (!nameString.matches(Regex("^[a-zA-Z0-9]+\$"))) {
-                "Только латинские буквы и цифры"
+            if (name.isBlank()) {
+                resourceProvider.getString(R.string.empty_login)
+            } else if (!name.matches(Regex("^[a-zA-Z0-9]+\$"))) {
+                resourceProvider.getString(R.string.only_latin_letters)
             } else {
                 null
             }
-        if (_state.value is AuthState.Content) {
-            _state.value = (_state.value as AuthState.Content).copy(
-                isLogin = isLogin,
-                nameErrorMessage = nameErrorMessage
-            )
-        } else {
-            _state.value = AuthState.Content(isLogin, nameErrorMessage = nameErrorMessage)
-        }
+
+        lastContent = lastContent.copy(
+            nameErrorMessage = nameErrorMessage
+        )
+
+        _state.value = lastContent
     }
 
-    fun checkPasswords(password: Editable?, repeatedPassword: Editable?) {
+    fun checkPasswords(password: String, repeatedPassword: String) {
         checkPassword(password)
+
         if (!isLogin) {
             val repeatedPasswordErrorMessage =
-                if (password != null && repeatedPassword != null && password.toString() != repeatedPassword.toString()) {
-                    "Пароли не совпадают"
+                if (password != repeatedPassword) {
+                    resourceProvider.getString(R.string.passwords_not_equals)
                 } else {
                     null
                 }
-            if (_state.value is AuthState.Content) {
-                _state.value = (_state.value as AuthState.Content).copy(
-                    isLogin = isLogin,
-                    repeatedPasswordErrorMessage = repeatedPasswordErrorMessage
-                )
-            } else {
-                _state.value = AuthState.Content(isLogin, repeatedPasswordErrorMessage)
-            }
+
+            lastContent = lastContent.copy(
+                repeatedPasswordErrorMessage = repeatedPasswordErrorMessage
+            )
+
+            _state.value = lastContent
         }
     }
 
-    private fun checkPassword(password: Editable?) {
-        val passwordString = (password ?: "")
+    private fun checkPassword(password: String) {
         val passwordErrorMessage =
-            if (passwordString.trim().isBlank()) {
-                "Пароль не может быть пустым"
-            } else if (!passwordString.matches(Regex("^[a-zA-Z0-9]+\$"))) {
-                "Только латинские буквы и цифры"
+            if (password.isBlank()) {
+                resourceProvider.getString(R.string.empty_password)
+            } else if (!password.matches(Regex("^[a-zA-Z0-9]+\$"))) {
+                resourceProvider.getString(R.string.only_latin_letters_and_numbers)
             } else {
                 null
             }
-        if (_state.value is AuthState.Content) {
-            _state.value = (_state.value as AuthState.Content).copy(
-                isLogin = isLogin,
-                passwordErrorMessage = passwordErrorMessage
-            )
-        } else {
-            _state.value = AuthState.Content(isLogin, passwordErrorMessage = passwordErrorMessage)
-        }
+
+        lastContent = lastContent.copy(
+            passwordErrorMessage = passwordErrorMessage
+        )
+
+        _state.value = lastContent
     }
 
     fun handleTabChange(position: Int) {

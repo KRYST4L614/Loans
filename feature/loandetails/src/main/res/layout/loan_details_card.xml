@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/backgroundColor"
+    app:cardCornerRadius="16dp">
+
+    <include
+        android:id="@+id/loanDetailsCardThumbnail"
+        layout="@layout/loan_details_card_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loanDetailsConstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/loanIdTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/loan_id_title"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/loanId"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/loanIdTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="№ 176899134565" />
+
+        <TextView
+            android:id="@+id/dateTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/date"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loanIdTitle" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/dateTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loanId"
+            tools:text="25.05.2024" />
+
+        <TextView
+            android:id="@+id/periodTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/period"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateTitle" />
+
+        <TextView
+            android:id="@+id/period"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/periodTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/percentTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/percent_title"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/periodTitle" />
+
+        <TextView
+            android:id="@+id/percent"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/percentTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/period"
+            tools:text="12%" />
+
+        <TextView
+            android:id="@+id/sumTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineHeight="16sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/sum_title"
+            android:textColor="?attr/colorOnSecondary"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percentTitle" />
+
+        <TextView
+            android:id="@+id/sum"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+            android:textFontWeight="500"
+            app:layout_constraintBaseline_toBaselineOf="@id/sumTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percent"
+            tools:text="10 000 ₽" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

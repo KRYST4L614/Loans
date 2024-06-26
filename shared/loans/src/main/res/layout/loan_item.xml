@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/backgroundColor"
@@ -9,49 +10,42 @@
 
     <TextView
         android:id="@+id/loanId"
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineHeight="20sp"
-        android:text="№ 176899134565"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textFontWeight="400"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="№ 176899134565" />
 
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lineHeight="16sp"
-        android:text="На рассмотрении"
-        android:textColor="@color/primaryDark"
         android:textFontWeight="400"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loanId" />
+        app:layout_constraintTop_toBottomOf="@id/loanId"
+        tools:text="На рассмотрении" />
 
     <TextView
         android:id="@+id/sum"
+        style="@style/TextMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineHeight="20sp"
-        android:text="10 000 ₽"
-        android:textColor="@color/fontDarkPrimaryInverse"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10 000 ₽" />
 
     <TextView
         android:id="@+id/date"
+        style="@style/TextMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lineHeight="20sp"
-        android:text="25 сентября, вс"
-        android:textColor="#FF73787F"
-        android:textSize="16sp"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sum" />
+        app:layout_constraintTop_toBottomOf="@id/sum"
+        tools:text="25 сентября, вс" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

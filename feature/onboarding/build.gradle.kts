@@ -10,8 +10,6 @@ android {
 
     defaultConfig {
         minSdk = 28
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -41,21 +39,17 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.com.github.terrakok.cicerone)
     implementation(libs.com.google.dagger)
     ksp(libs.com.google.dagger.compiler)
 
     implementation(project(":component:resources"))
-    implementation(project(":shared:fragmentDependencies"))
-    implementation(project(":shared:viewModelFactory"))
-    implementation(project(":shared:viewPagerAdapter"))
+    implementation(project(":shared:fragmentdependencies"))
+    implementation(project(":shared:viewmodelfactory"))
+    implementation(project(":shared:viewpageradapter"))
 }
