@@ -64,7 +64,6 @@ class AuthViewModel @Inject constructor(
                 } else {
                     router.openOnboarding()
                 }
-
             } else {
                 _state.value = AuthState.Error(checkErrorResponse(response as Error))
                 saveTokenUseCase(null)
@@ -88,6 +87,7 @@ class AuthViewModel @Inject constructor(
                     _state.value = AuthState.Error(checkErrorResponse(response as Error))
                 }
             }
+            isLogin = true
         }
 
     private fun checkErrorResponse(errorResponse: Error): String {
