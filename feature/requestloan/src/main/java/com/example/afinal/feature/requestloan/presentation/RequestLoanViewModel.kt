@@ -142,7 +142,7 @@ class RequestLoanViewModel @Inject constructor(
     }
 
     private fun isValidName(name: String): Boolean {
-        val regex = Regex("^[А-Яа-я]+\$")
+        val regex = Regex("^[A-Яа-я]+([\\s\\-][A-Яа-я]+)*\$")
         return name.matches(regex)
     }
 }

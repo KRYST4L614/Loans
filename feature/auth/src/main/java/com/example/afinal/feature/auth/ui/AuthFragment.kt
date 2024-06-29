@@ -100,9 +100,7 @@ class AuthFragment : Fragment() {
 
     private fun showAuthDialog() {
         if (childFragmentManager.findFragmentByTag(BOTTOM_SHEET_TAG)?.isAdded != true) {
-            val bs = AuthBottomSheet().apply {
-                isCancelable = false
-            }
+            val bs = AuthBottomSheet()
             bs.show(childFragmentManager, BOTTOM_SHEET_TAG)
         }
     }

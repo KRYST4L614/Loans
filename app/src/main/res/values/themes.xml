@@ -20,6 +20,7 @@
         <item name="android:windowBackground">@color/backGroundDayTertiary</item>
         <item name="android:colorError">@color/indicatorDayError</item>
         <item name="fontFamily">sans-serif</item>
+        <item name="colorAccent">@color/fontPrimaryDay</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

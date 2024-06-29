@@ -59,11 +59,6 @@ class AcceptLoanFragment : Fragment() {
 
         setOnClickListeners()
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            viewModel.close()
-            this.remove()
-        }
-
         binding.title.text =
             getString(R.string.accept_title).format(requireArguments().getInt(SUM_KEY).toSum())
     }
@@ -76,6 +71,11 @@ class AcceptLoanFragment : Fragment() {
 
             addressesButton.setOnClickListener {
                 viewModel.openAddresses()
+            }
+
+            requireActivity().onBackPressedDispatcher.addCallback {
+                viewModel.close()
+                this.remove()
             }
         }
     }

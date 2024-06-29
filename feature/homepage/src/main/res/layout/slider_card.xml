@@ -34,6 +34,7 @@
             android:inputType="numberDecimal"
             android:maxLength="6"
             android:text="@string/amount"
+            android:textCursorDrawable="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="LabelFor" />

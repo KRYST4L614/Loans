@@ -39,6 +39,12 @@ class AuthViewModel @Inject constructor(
         saveTokenUseCase(null)
     }
 
+    fun close() {
+        if (_state.value !is Loading) {
+            router.close()
+        }
+    }
+
     fun handleButtonClick(name: String, password: String, repeatedPassword: String) {
         if (isLogin) {
             login(name, password)
@@ -107,7 +113,7 @@ class AuthViewModel @Inject constructor(
                             getString(ComponentR.string.invalid_response_error)
 
                         is UnknownHostException ->
-                            getString(ComponentR.string.invalid_response_error)
+                            getString(ComponentR.string.unknown_host_error)
 
                         else -> getString(ComponentR.string.timeout_error)
                     }

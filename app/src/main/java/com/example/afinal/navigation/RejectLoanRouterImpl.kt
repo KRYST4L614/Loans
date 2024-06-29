@@ -8,5 +8,5 @@ import javax.inject.Inject
 class RejectLoanRouterImpl @Inject constructor(
     private val router: Router
 ) : RejectLoanRouter {
-    override fun close() = router.backTo(getHomeScreen())
+    override fun close() = router.replaceScreen(getHomeScreen())
 }

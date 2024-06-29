@@ -9,8 +9,8 @@ import javax.inject.Inject
 class SplashRouterImpl @Inject constructor(
     private val router: Router
 ) : SplashRouter {
-    override fun openHome() = router.newRootScreen(getHomeScreen())
+    override fun openHome() = router.replaceScreen(getHomeScreen())
 
-    override fun openAuth() = router.newRootScreen(getAuthScreen())
+    override fun openAuth() = router.replaceScreen(getAuthScreen())
 
 }

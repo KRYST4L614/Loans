@@ -13,4 +13,6 @@ class AuthRouterImpl @Inject constructor(private val router: Router) :
     }
 
     override fun openHome() = router.replaceScreen(getHomeScreen())
+
+    override fun close() = router.exit()
 }

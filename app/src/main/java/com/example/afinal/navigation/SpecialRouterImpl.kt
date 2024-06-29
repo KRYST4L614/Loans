@@ -7,5 +7,8 @@ import javax.inject.Inject
 
 class SpecialRouterImpl @Inject constructor(private val router: Router) : SpecialRouter {
     override fun close() = router.exit()
-    override fun openAddresses() = router.navigateTo(getAddressesScreen())
+    override fun openAddresses() {
+        router.exit()
+        router.navigateTo(getAddressesScreen())
+    }
 }

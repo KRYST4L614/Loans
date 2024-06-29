@@ -39,10 +39,9 @@ class HomePageViewModel @Inject constructor(
     fun openLoanDetails(loan: Loan) = router.openLoanDetails(loan)
 
     fun openRequestLoan(sum: Int) {
-        if (sum >= 500) {
-            loansConditions?.let {
+        loansConditions?.let {
+            if (sum >= 500 && sum <= loansConditions!!.maxAmount)
                 router.openRequestLoan(loansConditions!!.copy(maxAmount = sum))
-            }
         }
     }
 

@@ -6,5 +6,5 @@ import com.github.terrakok.cicerone.Router
 import javax.inject.Inject
 
 class OnboardingRouterImpl @Inject constructor(private val router: Router) : OnboardingRouter {
-    override fun openHome() = router.newRootScreen(getHomeScreen())
+    override fun openHome() = router.replaceScreen(getHomeScreen())
 }

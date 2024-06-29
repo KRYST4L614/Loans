@@ -122,7 +122,7 @@ class LoanDetailsFragment : Fragment() {
         with(binding.loanDetailsCard) {
             loanId.text = getString(LoansR.string.loan_id).format(loan.id)
             date.text = SimpleDateFormat(
-                "d MMMM, EEE",
+                "d.MM.y",
                 resources.configuration.locales[0]
             ).format(loan.date)
             percent.text = getString(R.string.percent).format(loan.percent)

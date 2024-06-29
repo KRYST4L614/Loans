@@ -23,7 +23,10 @@ class MenuPageRouterImpl @Inject constructor(
     override fun openSpecial() = router.navigateTo(getSpecialScreen())
 
     override fun openOnboarding() = router.navigateTo(getOnboardingScreen())
+
     override fun openMyLoansPage() = localRouter.navigateTo(getMyLoans())
+
     override fun openAddresses() = router.navigateTo(getAddressesScreen())
+
     override fun openAuth() = router.newRootScreen(getAuthScreen())
 }
