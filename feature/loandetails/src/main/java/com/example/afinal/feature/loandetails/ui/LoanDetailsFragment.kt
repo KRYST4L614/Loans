@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -45,6 +45,13 @@ class LoanDetailsFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<LoanDetailsViewModel> { viewModelFactory }
+
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.close()
+            }
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -86,11 +93,6 @@ class LoanDetailsFragment : Fragment() {
                 is Loading -> observeLoadingState()
                 is Error -> observeErrorState(it)
             }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback {
-            viewModel.close()
-            this.remove()
         }
     }
 
@@ -201,6 +203,7 @@ class LoanDetailsFragment : Fragment() {
                 viewModel.getLoanDetails(loan.id)
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
     }
 
     private fun isErrorShows(shows: Boolean) {
@@ -213,6 +216,7 @@ class LoanDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        onBackPressedCallback.remove()
         _binding = null
     }
 }

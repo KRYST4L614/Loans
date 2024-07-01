@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +26,13 @@ class RejectLoanFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<RejectLoanViewModel> { viewModelFactory }
+
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.close()
+            }
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,14 +62,12 @@ class RejectLoanFragment : Fragment() {
             viewModel.close()
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            viewModel.close()
-            this.remove()
-        }
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        onBackPressedCallback.remove()
         _binding = null
     }
 }

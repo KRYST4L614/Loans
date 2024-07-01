@@ -60,21 +60,32 @@ class OnboardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setNavigationOnClickListener {
-            viewModel.openHome()
-        }
-        binding.viewPager.adapter = ViewPagerAdapter(
-            childFragmentManager,
-            lifecycle,
-            listOf(
-                ArrangeLoanOnboardingFragment::newInstance,
-                GetLoanOnboardingFragment::newInstance,
-                ArrangedLoansOnboardingFragment::newInstance
-            )
-        )
-        TabLayoutMediator(binding.tableLayout, binding.viewPager) { _, _ ->
-        }.attach()
 
+        setupViewPager()
+
+        setOnClickListeners()
+
+        setTabChangeListener()
+    }
+
+    private fun setupViewPager() {
+        with(binding) {
+            viewPager.adapter = ViewPagerAdapter(
+                childFragmentManager,
+                lifecycle,
+                listOf(
+                    ArrangeLoanOnboardingFragment::newInstance,
+                    GetLoanOnboardingFragment::newInstance,
+                    ArrangedLoansOnboardingFragment::newInstance
+                )
+            )
+            TabLayoutMediator(tableLayout, viewPager) { _, _ ->
+            }.attach()
+        }
+    }
+
+    private fun setOnClickListeners() {
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
         with(binding) {
             backButton.setOnClickListener {
                 viewPager.currentItem = (viewPager.currentItem - 1).coerceAtLeast(0)
@@ -86,29 +97,41 @@ class OnboardingFragment : Fragment() {
                 }
                 viewPager.currentItem = (viewPager.currentItem + 1).coerceAtMost(2)
             }
+
+            toolbar.setNavigationOnClickListener {
+                viewModel.openHome()
+            }
         }
+    }
 
-        binding.tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> binding.backButton.isVisible = false
+    private fun setTabChangeListener() {
+        with(binding) {
+            tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> {
+                            backButton.isVisible = false
+                            nextButton.text = getString(R.string.next_button)
+                        }
 
-                    2 -> binding.nextButton.text = getString(R.string.close_button)
+                        2 -> {
+                            nextButton.text = getString(R.string.close_button)
+                            backButton.isVisible = true
+                        }
 
-                    else -> {
-                        binding.backButton.isVisible = true
-                        binding.nextButton.text = getString(R.string.next_button)
+                        else -> {
+                            backButton.isVisible = true
+                            nextButton.text = getString(R.string.next_button)
+                        }
                     }
                 }
-            }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
 
-        })
-
-        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
+            })
+        }
     }
 
     override fun onDestroyView() {

@@ -51,7 +51,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/login"
-        android:inputType="text"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="16dp">
@@ -72,12 +71,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:inputType="textPassword"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="16dp"
-        app:endIconDrawable="@drawable/eye_off"
-        app:endIconMode="custom">
+        app:endIconDrawable="@drawable/password_selector"
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
@@ -95,13 +93,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/repeat_password"
-        android:inputType="textPassword"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="16dp"
         android:visibility="gone"
-        app:endIconDrawable="@drawable/eye_off"
-        app:endIconMode="custom">
+        app:endIconDrawable="@drawable/password_selector"
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/repeatPasswordEditText"
@@ -109,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="name"
-            android:inputType="text" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

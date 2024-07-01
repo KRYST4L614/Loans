@@ -5,7 +5,6 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -16,8 +15,6 @@ import com.example.afinal.feature.auth.presentation.AuthState.Content
 import com.example.afinal.feature.auth.presentation.AuthViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 class AuthBottomSheet : BottomSheetDialogFragment() {
 
@@ -89,35 +86,7 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
 
                 )
             }
-
-            passwordInputLayout.setEndIconOnClickListener {
-                iconEndClickListener(passwordInputLayout, passwordEditText)
-            }
-
-
-            repeatPasswordInputLayout.setEndIconOnClickListener {
-                iconEndClickListener(repeatPasswordInputLayout, repeatPasswordEditText)
-            }
         }
-    }
-
-    private fun iconEndClickListener(inputLayout: TextInputLayout, editText: TextInputEditText) {
-        if (editText.transformationMethod == null) {
-            inputLayout.endIconDrawable = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.eye_off,
-                requireContext().theme
-            )
-            editText.transformationMethod = PasswordTransformationMethod()
-        } else {
-            inputLayout.endIconDrawable = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.eye_on,
-                requireContext().theme
-            )
-            editText.transformationMethod = null
-        }
-        editText.setSelection(editText.text?.length ?: 0)
     }
 
     private fun setupTabLayout() {

@@ -21,6 +21,8 @@
         <item name="android:colorError">@color/indicatorDayError</item>
         <item name="fontFamily">sans-serif</item>
         <item name="colorAccent">@color/fontPrimaryDay</item>
+
+        <item name="actionBarItemBackground">@android:color/transparent</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

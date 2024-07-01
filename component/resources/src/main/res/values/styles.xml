@@ -16,6 +16,7 @@
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="errorIconDrawable">@null</item>
         <item name="cursorColor">@color/fontPrimaryDay</item>
+        <item name="android:textCursorDrawable">@null</item>
         <item name="boxCornerRadiusBottomStart">8dp</item>
         <item name="boxCornerRadiusBottomEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
@@ -23,11 +24,13 @@
         <item name="hintTextColor">@color/borderPrimaryDay</item>
         <item name="boxStrokeColor">@color/borderPrimaryDay</item>
         <item name="errorTextColor">@color/indicatorDayError</item>
+        <item name="controlBackground">@android:color/transparent</item>
     </style>
 
     <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textSize">14sp</item>
         <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
     <style name="TextLarge">

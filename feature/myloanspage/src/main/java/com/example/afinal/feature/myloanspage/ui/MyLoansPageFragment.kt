@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,6 +33,13 @@ class MyLoansPageFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<MyLoansPageViewModel> { viewModelFactory }
 
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.close()
+            }
+        }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         DaggerMyLoansPageComponent
@@ -59,11 +66,6 @@ class MyLoansPageFragment : Fragment() {
         observeViewModelState()
 
         viewModel.getLoans()
-
-        requireActivity().onBackPressedDispatcher.addCallback {
-            viewModel.close()
-            this.remove()
-        }
     }
 
     private fun setOnClickListeners() {
@@ -78,6 +80,7 @@ class MyLoansPageFragment : Fragment() {
                 viewModel.getLoans()
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
     }
 
     private fun setupLoansList() {
@@ -140,6 +143,7 @@ class MyLoansPageFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        onBackPressedCallback.remove()
         _binding = null
     }
 }

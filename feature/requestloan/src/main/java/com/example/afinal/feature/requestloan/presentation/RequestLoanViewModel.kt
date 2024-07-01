@@ -110,13 +110,13 @@ class RequestLoanViewModel @Inject constructor(
     }
 
     fun checkFirstName(firstName: String) {
-        val lastNameErrorMessage = when {
+        val firstNameErrorMessage = when {
             firstName.isBlank() -> resourceProvider.getString(R.string.empty_name)
             !isValidName(firstName) -> resourceProvider.getString(R.string.invalid_name)
             else -> null
         }
 
-        lastContent = lastContent.copy(firstNameError = lastNameErrorMessage)
+        lastContent = lastContent.copy(firstNameError = firstNameErrorMessage)
 
         _state.value = lastContent
     }
@@ -142,7 +142,7 @@ class RequestLoanViewModel @Inject constructor(
     }
 
     private fun isValidName(name: String): Boolean {
-        val regex = Regex("^[A-Яа-я]+([\\s\\-][A-Яа-я]+)*\$")
+        val regex = Regex("^[А-Яа-я]+([\\s\\-][А-Яа-я]+)*\$")
         return name.matches(regex)
     }
 }

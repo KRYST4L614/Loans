@@ -16,6 +16,7 @@ import com.example.afinal.shared.loans.domain.entities.LoanConditions
 import com.example.afinal.shared.resourceprovider.ResourceProvider
 import com.example.afinal.util.NetworkResponse
 import com.example.afinal.util.NetworkResponse.Success
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -47,18 +48,24 @@ class HomePageViewModel @Inject constructor(
 
     fun getLoansData() = viewModelScope.launch {
         _state.value = Loading
-        val loansResponse = getLoansUseCase()
-        val loansConditionsResponse = getLoanConditionsUseCase()
+        val loansResponse = async { getLoansUseCase() }
+        val loansConditionsResponse = async { getLoanConditionsUseCase() }
 
-        if (loansResponse is Success && loansConditionsResponse is Success) {
-            loansConditions = loansConditionsResponse.content
+        val loans = loansResponse.await()
+        val loansConditions = loansConditionsResponse.await()
+
+        if (loans is Success && loansConditions is Success) {
+            this@HomePageViewModel.loansConditions = loansConditions.content
             _state.value =
-                Content(loansResponse.content.take(3), loansConditionsResponse.content)
+                Content(
+                    loans.content.take(3),
+                    loansConditions.content
+                )
         } else {
-            val errorResponse = if (loansResponse is NetworkResponse.Error) {
-                loansResponse
+            val errorResponse = if (loans is NetworkResponse.Error) {
+                loans
             } else {
-                loansConditionsResponse as NetworkResponse.Error
+                loansConditions as NetworkResponse.Error
             }
 
             _state.value = Error(checkErrorResponse(errorResponse))

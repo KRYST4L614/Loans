@@ -30,7 +30,6 @@ import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -42,6 +41,7 @@ interface DataModule {
 
     companion object {
         private const val PREFERENCES_FILENAME = "Preferences"
+        private const val BASE_URL = "https://shift-loan-app.exodar.heartlessguy.pro/"
         private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
         @Provides
@@ -49,9 +49,6 @@ interface DataModule {
             getTokenUseCase: GetTokenUseCase,
             router: HomePageRouter
         ): Retrofit {
-
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
             val authInterceptor = Interceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
@@ -69,7 +66,6 @@ interface DataModule {
                 .writeTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
                 .connectTimeout(1, TimeUnit.MINUTES)
-                .addInterceptor(interceptor)
                 .addInterceptor(authInterceptor)
                 .build()
             return Retrofit.Builder()
@@ -80,7 +76,7 @@ interface DataModule {
                         GsonBuilder().setLenient().create()
                     )
                 )
-                .baseUrl("https://shift-loan-app.exodar.heartlessguy.pro/")
+                .baseUrl(BASE_URL)
                 .build()
         }
 

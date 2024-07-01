@@ -7,7 +7,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -42,6 +42,13 @@ class RequestLoanFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<RequestLoanViewModel> { viewModelFactory }
 
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.close()
+            }
+        }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         DaggerRequestLoanComponent
@@ -72,10 +79,7 @@ class RequestLoanFragment : Fragment() {
     private fun setOnClickListeners() {
         setRequestLoanButtonClickListener()
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            viewModel.close()
-            this.remove()
-        }
+        requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
 
         with(binding) {
             toolbar.setNavigationOnClickListener {
@@ -119,7 +123,7 @@ class RequestLoanFragment : Fragment() {
 
     private fun setTextChangeListeners() {
         with(binding) {
-            phoneEditText.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+            phoneEditText.addTextChangedListener(PhoneNumberFormattingTextWatcher("RU"))
 
             phoneEditText.doAfterTextChanged {
                 viewModel.checkPhone(it?.toString() ?: "")
@@ -177,6 +181,7 @@ class RequestLoanFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        onBackPressedCallback.remove()
         _binding = null
     }
 }

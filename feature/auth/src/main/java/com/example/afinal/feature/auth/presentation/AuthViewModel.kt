@@ -90,10 +90,10 @@ class AuthViewModel @Inject constructor(
                 if (response is NetworkResponse.Success) {
                     login(name, password)
                 } else {
+                    isLogin = true
                     _state.value = AuthState.Error(checkErrorResponse(response as Error))
                 }
             }
-            isLogin = true
         }
 
     private fun checkErrorResponse(errorResponse: Error): String {

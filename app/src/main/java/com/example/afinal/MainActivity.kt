@@ -2,13 +2,12 @@ package com.example.afinal
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.example.afinal.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.example.afinal.feature.splash.getSplashScreen as getSplash
 import javax.inject.Inject
+import com.example.afinal.feature.splash.getSplashScreen as getSplash
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
