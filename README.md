@@ -1,4 +1,5 @@
-![login](https://github.com/user-attachments/assets/2227660a-9a9b-498c-a281-aad01b974650)
+
+<img src="https://github.com/user-attachments/assets/2227660a-9a9b-498c-a281-aad01b974650" width="40" height="40" />
 ![register](https://github.com/user-attachments/assets/fc2cc672-299c-4a7b-b474-76791f4960aa)
 ![login_error](https://github.com/user-attachments/assets/e1b0227b-0f9e-45f1-9b02-5605229dc2d6)
 ![register_error](https://github.com/user-attachments/assets/78bcdf30-e656-4565-8471-6cc4cc4b584b)
