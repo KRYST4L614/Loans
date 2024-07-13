@@ -1,4 +1,4 @@
-package com.example.afinal.shared.loans.data
+package com.example.afinal.shared.loans.data.remote
 
 import com.example.afinal.shared.loans.domain.entities.Loan
 import retrofit2.Call

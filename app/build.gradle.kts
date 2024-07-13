@@ -1,3 +1,7 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
+private val BASE_URL: String = gradleLocalProperties(rootDir, providers).getProperty("BASE_URL")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -23,6 +27,16 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", BASE_URL)
+        }
+
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField("String", "BASE_URL", BASE_URL)
         }
     }
     compileOptions {
@@ -37,6 +51,9 @@ android {
         enable = true
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -48,6 +65,9 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.com.google.dagger)
     ksp(libs.com.google.dagger.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
     implementation(libs.com.github.terrakok.cicerone)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)

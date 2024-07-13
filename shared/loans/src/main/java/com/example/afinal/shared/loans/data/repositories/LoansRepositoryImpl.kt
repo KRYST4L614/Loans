@@ -1,6 +1,6 @@
 package com.example.afinal.shared.loans.data.repositories
 
-import com.example.afinal.shared.loans.data.LoansApiService
+import com.example.afinal.shared.loans.data.remote.LoansApiService
 import com.example.afinal.shared.loans.domain.entities.Loan
 import com.example.afinal.shared.loans.domain.repositories.LoansRepository
 import com.example.afinal.util.NetworkResponse

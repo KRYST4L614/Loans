@@ -1,6 +1,7 @@
 package com.example.afinal.shared.loans.domain.entities
 
 import android.os.Parcelable
+import androidx.room.Entity
 import kotlinx.parcelize.Parcelize
 
 import java.util.Date
@@ -12,6 +13,7 @@ enum class Status {
 }
 
 @Parcelize
+@Entity
 data class Loan(
     val amount: Double,
     val date: Date,

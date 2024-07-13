@@ -1,4 +1,4 @@
-package com.example.afinal.feature.homepage.data
+package com.example.afinal.feature.homepage.data.remote
 
 import com.example.afinal.shared.loans.domain.entities.LoanConditions
 import retrofit2.Call
