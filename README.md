@@ -1,10 +1,9 @@
 
-<img src="https://github.com/user-attachments/assets/2227660a-9a9b-498c-a281-aad01b974650" width="40" height="40" />
-![register](https://github.com/user-attachments/assets/fc2cc672-299c-4a7b-b474-76791f4960aa)
-![login_error](https://github.com/user-attachments/assets/e1b0227b-0f9e-45f1-9b02-5605229dc2d6)
-![register_error](https://github.com/user-attachments/assets/78bcdf30-e656-4565-8471-6cc4cc4b584b)
-![host_error](https://github.com/user-attachments/assets/08d36877-4790-48f4-822e-e72af5f366da)
-
+<img src="https://github.com/user-attachments/assets/2227660a-9a9b-498c-a281-aad01b974650" width="80" height="200" />
+<img src="https://github.com/user-attachments/assets/fc2cc672-299c-4a7b-b474-76791f4960aa" width="80" height="200" />
+<img src="https://github.com/user-attachments/assets/e1b0227b-0f9e-45f1-9b02-5605229dc2d6" width="80" height="200" />
+<img src="https://github.com/user-attachments/assets/78bcdf30-e656-4565-8471-6cc4cc4b584b" width="80" height="200" />
+<img src="https://github.com/user-attachments/assets/08d36877-4790-48f4-822e-e72af5f366da" width="80" height="200" />
 
 Приложение для оформления микрозаймов.
 Типичный сценарий: Пользователь регистрируется в приложении, после чего осуществляет вход. 
