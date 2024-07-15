@@ -8,8 +8,8 @@ import com.example.afinal.feature.auth.data.AuthApiService
 import com.example.afinal.feature.auth.data.AuthRepositoryImpl
 import com.example.afinal.feature.auth.domain.repositories.AuthRepository
 import com.example.afinal.feature.homepage.HomePageRouter
-import com.example.afinal.feature.homepage.data.remote.LoanConditionsApiService
 import com.example.afinal.feature.homepage.data.LoansConditionRepositoryImpl
+import com.example.afinal.feature.homepage.data.remote.LoanConditionsApiService
 import com.example.afinal.feature.homepage.domain.LoanConditionsRepository
 import com.example.afinal.feature.loandetails.data.LoanDetailsApiService
 import com.example.afinal.feature.loandetails.data.LoanDetailsRepositoryImpl
@@ -18,8 +18,6 @@ import com.example.afinal.feature.requestloan.data.RequestLoanApiService
 import com.example.afinal.feature.requestloan.data.RequestLoanRepositoryImpl
 import com.example.afinal.feature.requestloan.domain.RequestLoanRepository
 import com.example.afinal.feature.splash.domain.GetTokenUseCase
-import com.example.afinal.shared.loans.data.local.LoanDao
-import com.example.afinal.shared.loans.data.local.LoansDatabase
 import com.example.afinal.shared.loans.data.remote.LoansApiService
 import com.example.afinal.shared.loans.data.repositories.AuthTokenRepositoryImpl
 import com.example.afinal.shared.loans.data.repositories.LoansRepositoryImpl
@@ -143,16 +141,6 @@ interface DataModule {
         @Singleton
         @Provides
         fun provideResourceProvider(context: Context) = ResourceProvider(context)
-
-        @Provides
-        fun provideLoanDatabase(context: Context): LoansDatabase {
-            return LoansDatabase.getDatabase(context)
-        }
-
-        @Provides
-        fun provideLoanDao(database: LoansDatabase): LoanDao {
-            return database.dao()
-        }
     }
 
     @Binds

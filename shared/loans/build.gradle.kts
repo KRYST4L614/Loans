@@ -43,9 +43,6 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.com.google.dagger)
     ksp(libs.com.google.dagger.compiler)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime)
     implementation(libs.com.squareup.retrofit2)
     implementation(libs.androidx.security.crypto)
 
