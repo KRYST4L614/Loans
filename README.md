@@ -1,9 +1,6 @@
 <img src="https://github.com/user-attachments/assets/5581f01a-c0ed-4c85-935c-ac9a40d89a4b" width="300" height="700" />
 <img src="https://github.com/user-attachments/assets/2227660a-9a9b-498c-a281-aad01b974650" width="300" height="700" />
 <img src="https://github.com/user-attachments/assets/fc2cc672-299c-4a7b-b474-76791f4960aa" width="300" height="700" />
-<img src="https://github.com/user-attachments/assets/e1b0227b-0f9e-45f1-9b02-5605229dc2d6" width="300" height="700" />
-<img src="https://github.com/user-attachments/assets/78bcdf30-e656-4565-8471-6cc4cc4b584b" width="300" height="700" />
-<img src="https://github.com/user-attachments/assets/08d36877-4790-48f4-822e-e72af5f366da" width="300" height="700" />
 
 Приложение для оформления микрозаймов.
 Типичный сценарий: Пользователь регистрируется в приложении, после чего осуществляет вход. 
