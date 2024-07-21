@@ -28,7 +28,7 @@
 - Стек использованных технологий:
 	- Clean Architecture
 	- MVVM
-	- Вертикальная многомодульность (по feature)
+	- Горизонтальная многомодульность (по feature)
 	- Dagger2
 	- Retrofit2
 	- Facebook Shimmer
