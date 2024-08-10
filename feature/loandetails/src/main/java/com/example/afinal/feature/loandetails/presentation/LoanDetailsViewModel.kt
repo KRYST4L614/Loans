@@ -4,15 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.afinal.component.resources.R
 import com.example.afinal.feature.loandetails.LoanDetailsRouter
 import com.example.afinal.feature.loandetails.domain.GetLoanDetailsUseCase
 import com.example.afinal.feature.loandetails.presentation.LoanDetailsState.Error
+import com.example.afinal.shared.loans.domain.entities.Status
 import com.example.afinal.shared.resourceprovider.ResourceProvider
 import com.example.afinal.util.NetworkResponse
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 import javax.inject.Inject
+import com.example.afinal.component.resources.R as ComponentR
+import com.example.afinal.shared.loans.R as SharedR
 
 class LoanDetailsViewModel @Inject constructor(
     private val router: LoanDetailsRouter,
@@ -37,23 +39,67 @@ class LoanDetailsViewModel @Inject constructor(
     private fun checkErrorResponse(response: NetworkResponse.Error): String {
         with(resourceProvider) {
             return when (response.code) {
-                401 -> getString(R.string.unauthorized_error)
+                401 -> getString(ComponentR.string.unauthorized_error)
 
-                403 -> getString(R.string.forbidden_error)
+                403 -> getString(ComponentR.string.forbidden_error)
 
-                404 -> getString(R.string.not_found_error)
+                404 -> getString(ComponentR.string.not_found_error)
 
                 null -> {
                     when (response.e) {
-                        is IllegalStateException -> getString(R.string.invalid_response_error)
+                        is IllegalStateException -> getString(ComponentR.string.invalid_response_error)
 
-                        is UnknownHostException -> getString(R.string.unknown_host_error)
+                        is UnknownHostException -> getString(ComponentR.string.unknown_host_error)
 
-                        else -> getString(R.string.timeout_error)
+                        else -> getString(ComponentR.string.timeout_error)
                     }
                 }
 
-                else -> getString(R.string.common_error)
+                else -> getString(ComponentR.string.common_error)
+            }
+        }
+    }
+
+    fun chooseStatusText(status: Status): String {
+        with(resourceProvider) {
+            return when (status) {
+                Status.APPROVED -> {
+                    getString(SharedR.string.loan_approved)
+                }
+
+                Status.REGISTERED -> {
+                    getString(SharedR.string.loan_registered)
+                }
+
+                Status.GRANTED -> {
+                    getString(SharedR.string.loan_rejected)
+                }
+
+                else -> {
+                    throw IllegalStateException("Illegal state of loan")
+                }
+            }
+        }
+    }
+
+    fun chooseStatusColor(status: Status): Int {
+        with(resourceProvider) {
+            return when (status) {
+                Status.APPROVED -> {
+                    getColor(SharedR.color.indicator_positive)
+                }
+
+                Status.REGISTERED -> {
+                    getColor(SharedR.color.indicator_attention)
+                }
+
+                Status.GRANTED -> {
+                    getColor(ComponentR.color.fontSecondaryDay)
+                }
+
+                else -> {
+                    throw IllegalStateException("Illegal state of loan")
+                }
             }
         }
     }

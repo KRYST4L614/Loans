@@ -186,12 +186,7 @@ class HomePageFragment : Fragment() {
                 if (!text.isNullOrEmpty()) {
                     val sum = text.toString().toInt()
                     sliderCard.sumSlider.progress = if (sum > 0) sum / (maxAmount / 100) else 0
-                    sliderCard.sumMessage.text =
-                        if (sum > maxAmount) {
-                            getString(R.string.u_bound_sum).format(maxAmount)
-                        } else if (sum < 500) {
-                            getString(R.string.l_bound_sum)
-                        } else null
+                    sliderCard.sumMessage.text = viewModel.checkAmountIsValid(sum)
                 }
             }
         }

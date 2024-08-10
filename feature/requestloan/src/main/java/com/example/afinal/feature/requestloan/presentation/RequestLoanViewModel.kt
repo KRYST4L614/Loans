@@ -59,10 +59,13 @@ class RequestLoanViewModel @Inject constructor(
                 )
             )
             if (response is NetworkResponse.Success) {
-                if (response.content.state == Status.REJECTED) {
+                if (response.content.status == Status.REJECTED) {
                     router.openRejectLoan()
                 } else {
-                    router.openAcceptLoan(response.content.amount.toInt())
+                    router.openAcceptLoan(
+                        response.content.amount.toInt(),
+                        response.content.issueDate
+                    )
                 }
                 close()
             } else {

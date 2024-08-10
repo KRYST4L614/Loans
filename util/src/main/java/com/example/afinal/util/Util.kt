@@ -1,9 +1,12 @@
 package com.example.afinal.util
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 fun CharSequence.toEditable(): Editable {
@@ -17,4 +20,12 @@ fun Number.toSum(): String {
     symbols.setGroupingSeparator(' ')
     formatter.decimalFormatSymbols = symbols
     return formatter.format(this)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun Date.convertToString(pattern: String, locale: Locale): String {
+    return SimpleDateFormat(
+        pattern,
+        locale
+    ).format(this)
 }

@@ -7,12 +7,12 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthApiService {
-    @POST("login")
+    @POST("auth/login")
     fun login(
         @Body requestBody: LoginUser
     ): Call<String>
 
-    @POST("registration")
+    @POST("auth/registration")
     fun registration(
         @Body requestBody: LoginUser
     ): Call<LoggedUser>

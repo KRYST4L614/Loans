@@ -156,8 +156,13 @@ class RequestLoanFragment : Fragment() {
             error.root.isVisible = false
 
             phoneInputLayout.error = content.phoneNumberError
+            phoneInputLayout.isErrorEnabled = content.phoneNumberError != null
+
             nameInputLayout.error = content.firstNameError
+            nameInputLayout.isErrorEnabled = content.firstNameError != null
+
             secondNameInputLayout.error = content.lastNameError
+            secondNameInputLayout.isErrorEnabled = content.lastNameError != null
         }
     }
 

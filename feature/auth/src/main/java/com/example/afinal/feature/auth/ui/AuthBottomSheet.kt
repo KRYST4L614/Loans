@@ -131,8 +131,13 @@ class AuthBottomSheet : BottomSheetDialogFragment() {
     private fun observeContentState(content: Content) {
         with(binding) {
             loginInputLayout.error = content.nameErrorMessage
+            loginInputLayout.isErrorEnabled = content.nameErrorMessage != null
+
             passwordInputLayout.error = content.passwordErrorMessage
+            passwordInputLayout.isErrorEnabled = content.passwordErrorMessage != null
+
             repeatPasswordInputLayout.error = content.repeatedPasswordErrorMessage
+            repeatPasswordInputLayout.isErrorEnabled = content.repeatedPasswordErrorMessage != null
         }
     }
 

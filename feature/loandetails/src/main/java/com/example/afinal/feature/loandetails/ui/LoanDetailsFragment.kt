@@ -21,8 +21,8 @@ import com.example.afinal.feature.loandetails.presentation.LoanDetailsViewModel
 import com.example.afinal.shared.fragmentDependencies.FragmentDependenciesStore
 import com.example.afinal.shared.loans.domain.entities.Loan
 import com.example.afinal.shared.loans.domain.entities.Status
+import com.example.afinal.util.convertToString
 import com.example.afinal.util.toSum
-import java.text.SimpleDateFormat
 import javax.inject.Inject
 import com.example.afinal.component.resources.R as ComponentR
 import com.example.afinal.shared.loans.R as LoansR
@@ -107,7 +107,7 @@ class LoanDetailsFragment : Fragment() {
         with(binding) {
             setupUserInfoCard(loan)
             setupLoanDetailsCard(loan)
-            setupStatusCard(loan)
+            setupStatusCard(loan.status)
             binding.toolbar.title = root.context.getString(LoansR.string.loan_id).format(loan.id)
         }
     }
@@ -123,10 +123,10 @@ class LoanDetailsFragment : Fragment() {
     private fun setupLoanDetailsCard(loan: Loan) {
         with(binding.loanDetailsCard) {
             loanId.text = getString(LoansR.string.loan_id).format(loan.id)
-            date.text = SimpleDateFormat(
+            date.text = loan.date.convertToString(
                 "d.MM.y",
                 resources.configuration.locales[0]
-            ).format(loan.date)
+            )
             percent.text = getString(R.string.percent).format(loan.percent)
             period.text = loan.period.toString()
             sum.text = getString(ComponentR.string.sum).format(
@@ -135,24 +135,10 @@ class LoanDetailsFragment : Fragment() {
         }
     }
 
-    private fun setupStatusCard(loan: Loan) {
-        with(binding.statusCard) {
-            status.text = when (loan.state) {
-                Status.APPROVED -> {
-                    status.setTextColor(requireContext().getColor(LoansR.color.indicator_positive))
-                    root.context.getString(LoansR.string.loan_approved)
-                }
-
-                Status.REGISTERED -> {
-                    status.setTextColor(requireContext().getColor(LoansR.color.indicator_attention))
-                    root.context.getString(LoansR.string.loan_registered)
-                }
-
-                Status.REJECTED -> {
-                    status.setTextColor(requireContext().getColor(ComponentR.color.fontSecondaryDay))
-                    root.context.getString(LoansR.string.loan_rejected)
-                }
-            }
+    private fun setupStatusCard(status: Status) {
+        with(binding.statusCard.status) {
+            text = viewModel.chooseStatusText(status)
+            setTextColor(viewModel.chooseStatusColor(status))
         }
     }
 

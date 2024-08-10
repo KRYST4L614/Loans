@@ -8,6 +8,7 @@ import java.util.Date
 enum class Status {
     APPROVED,
     REGISTERED,
+    GRANTED,
     REJECTED
 }
 
@@ -15,11 +16,12 @@ enum class Status {
 data class Loan(
     val amount: Double,
     val date: Date,
+    val issueDate: Date,
     val firstName: String,
     val id: Int,
     val lastName: String,
     val percent: Double,
     val period: Int,
     val phoneNumber: String,
-    val state: Status
+    val status: Status
 ) : Parcelable

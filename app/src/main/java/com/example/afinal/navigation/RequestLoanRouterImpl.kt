@@ -5,6 +5,7 @@ import com.example.afinal.feature.acceptloan.getAcceptLoanScreen
 import com.example.afinal.feature.rejectloan.getRejectLoanScreen
 import com.example.afinal.feature.requestloan.RequestLoanRouter
 import com.github.terrakok.cicerone.Router
+import java.util.Date
 import javax.inject.Inject
 
 class RequestLoanRouterImpl @Inject constructor(
@@ -13,5 +14,6 @@ class RequestLoanRouterImpl @Inject constructor(
 ) : RequestLoanRouter {
     override fun close() = localRouter.exit()
     override fun openRejectLoan() = router.navigateTo(getRejectLoanScreen())
-    override fun openAcceptLoan(sum: Int) = router.navigateTo(getAcceptLoanScreen(sum))
+    override fun openAcceptLoan(sum: Int, issueDate: Date) =
+        router.navigateTo(getAcceptLoanScreen(sum, issueDate))
 }

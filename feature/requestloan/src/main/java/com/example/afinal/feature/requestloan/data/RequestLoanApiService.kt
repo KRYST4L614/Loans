@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RequestLoanApiService {
-    @POST("loans")
+    @POST("loans/add")
     fun postLoan(@Body requestedLoan: RequestedLoan): Call<Loan>
 }

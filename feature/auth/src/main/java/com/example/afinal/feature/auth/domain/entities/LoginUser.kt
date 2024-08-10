@@ -1,6 +1,6 @@
 package com.example.afinal.feature.auth.domain.entities
 
 data class LoginUser(
-    val name: String,
+    val username: String,
     val password: String
 )

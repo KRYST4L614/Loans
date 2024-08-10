@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="accept_body">Для получения придите в банк с паспортом до 20 мая</string>
+    <string name="accept_body">Для получения придите в банк с паспортом до %1$s</string>
     <string name="addresses_button">Посмотреть адреса банков</string>
     <string name="accept_title">Получите %1$s ₽ в банке</string>
 </resources>

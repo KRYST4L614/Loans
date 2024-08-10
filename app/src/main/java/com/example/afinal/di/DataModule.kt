@@ -42,7 +42,7 @@ interface DataModule {
 
     companion object {
         private const val PREFERENCES_FILENAME = "Preferences"
-        private const val BASE_URL: String = BuildConfig.BASE_URL
+        private val BASE_URL: String = BuildConfig.BASE_URL
         private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
         @Provides
