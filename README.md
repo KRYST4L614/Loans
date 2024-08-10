@@ -1,6 +1,11 @@
 <img src="https://github.com/user-attachments/assets/2227660a-9a9b-498c-a281-aad01b974650" width="300" height="700" />
 <img src="https://github.com/user-attachments/assets/fc2cc672-299c-4a7b-b474-76791f4960aa" width="300" height="700" />
 
+*********
+Для начала работы необходимо задеплоить [backend часть](https://github.com/KRYST4L614/LoansBackend) и создать 
+переменную в local.properties: BASE_URL="ваш base url на backend".
+*********
+
 Приложение для оформления микрозаймов.
 Типичный сценарий: Пользователь регистрируется в приложении, после чего осуществляет вход. 
 Видит информацию, поясняющую что ему делать далее. 
